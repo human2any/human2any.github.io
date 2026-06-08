@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<robot name="RB_Y1_V1.0.1">
+  <virtual_joint name="virtual_joint" type="fixed" parent_frame="world" child_link="link_right_arm_0"/>
+  <group name="right_arm">
+    <chain base_link="link_right_arm_0" tip_link="link_right_arm_6"/>
+  </group>
+  <group name="left_arm">
+    <chain base_link="link_left_arm_0" tip_link="link_left_arm_6"/>
+  </group>
+  <group name="both_arms">
+    <group name="right_arm"/>
+    <group name="left_arm"/>
+  </group>
+  <group name="right_tool">
+    <link name="link_right_arm_6"/>
+  </group>
+  <end_effector name="right_eef" parent_link="link_right_arm_6" group="right_tool"/>
+  <group name="left_tool">
+    <link name="link_left_arm_6"/>
+  </group>
+  <end_effector name="left_eef" parent_link="link_left_arm_6" group="left_tool"/>
+  <disable_collisions link1="link_right_arm_0" link2="link_right_arm_1" reason="Adjacent"/>
+  <disable_collisions link1="link_right_arm_1" link2="link_right_arm_2" reason="Adjacent"/>
+  <disable_collisions link1="link_right_arm_2" link2="link_right_arm_3" reason="Adjacent"/>
+  <disable_collisions link1="link_right_arm_3" link2="link_right_arm_4" reason="Adjacent"/>
+  <disable_collisions link1="link_right_arm_4" link2="link_right_arm_5" reason="Adjacent"/>
+  <disable_collisions link1="link_right_arm_5" link2="link_right_arm_6" reason="Adjacent"/>
+  <disable_collisions link1="link_left_arm_0" link2="link_left_arm_1" reason="Adjacent"/>
+  <disable_collisions link1="link_left_arm_1" link2="link_left_arm_2" reason="Adjacent"/>
+  <disable_collisions link1="link_left_arm_2" link2="link_left_arm_3" reason="Adjacent"/>
+  <disable_collisions link1="link_left_arm_3" link2="link_left_arm_4" reason="Adjacent"/>
+  <disable_collisions link1="link_left_arm_4" link2="link_left_arm_5" reason="Adjacent"/>
+  <disable_collisions link1="link_left_arm_5" link2="link_left_arm_6" reason="Adjacent"/>
+  <disable_collisions link1="link_torso_0" link2="link_torso_2" reason="Adjacent"/>
+  <disable_collisions link1="link_torso_0" link2="link_torso_4" reason="Adjacent"/>
+  <disable_collisions link1="link_torso_1" link2="link_torso_2" reason="Adjacent"/>
+  <disable_collisions link1="link_torso_2" link2="link_torso_4" reason="Default"/>
+  <disable_collisions link1="link_torso_2" link2="link_torso_5" reason="Default"/>
+  <disable_collisions link1="link_torso_4" link2="link_torso_5" reason="Adjacent"/>
+  <disable_collisions link1="link_torso_5" link2="link_left_arm_0" reason="Default"/>
+  <disable_collisions link1="link_torso_4" link2="link_left_arm_2" reason="Default"/>
+  <disable_collisions link1="link_torso_4" link2="link_left_arm_3" reason="Default"/>
+  <disable_collisions link1="link_torso_5" link2="link_right_arm_0" reason="Default"/>
+  <disable_collisions link1="link_torso_0" link2="link_torso_1" reason="Adjacent"/>
+</robot>

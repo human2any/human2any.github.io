@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="[TODO: One-sentence paper description]">
+  <meta name="keywords" content="[TODO: keyword1], [TODO: keyword2], robot learning, CoRL 2025">
+  <title>Human2Any</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg" type="image/svg+xml">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="./static/js/index.js" defer></script>
+
+  <!-- Import map must appear before any type="module" scripts -->
+  <!-- All viewer deps are vendored under static/vendor (no runtime CDN). -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three":                 "./static/vendor/three/three.module.js",
+      "three/addons/":         "./static/vendor/three/examples/jsm/",
+      "three/examples/jsm/":   "./static/vendor/three/examples/jsm/",
+      "urdf-loader":           "./static/vendor/urdf-loader/URDFLoader.js"
+    }
+  }
+  </script>
+</head>
+<body>
+
+
+<!-- ============================================================
+     HERO — Title · Authors · Links
+     ============================================================ -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <h1 class="title is-1 publication-title">
+            Human2Any: Human-to-Robot Transfer via Constraint-Aware Compositional Planning
+          </h1>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Anonymous Authors
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors" style="margin-top: 0.25rem;">
+            <span class="author-block">
+              In submission</a>
+            </span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+
+              <span class="link-block">
+                <a href="[TODO: PDF URL]" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="[TODO: arXiv URL]" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="[TODO: YouTube URL]" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-youtube"></i></span>
+                  <span>Video</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="[TODO: GitHub URL]" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                </a>
+              </span>
+
+              <!--
+              <span class="link-block">
+                <a href="[TODO: Dataset URL]" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-database"></i></span>
+                  <span>Dataset</span>
+                </a>
+              </span>
+              -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     TEASER VIDEO
+     TODO: Uncomment the <video> tag and remove the placeholder div.
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-three-quarters">
+
+        <!-- placeholder — remove when you have the video -->
+        <div class="placeholder" style="min-height:360px;">
+          <p><strong>Teaser video</strong></p>
+          <p class="has-text-grey is-size-7"><code>./static/videos/teaser.mp4</code></p>
+        </div>
+        <!--
+        <video playsinline autoplay loop muted controls src="./static/videos/teaser.mp4"
+               width="100%" style="border-radius:16px;"></video>
+        -->
+
+        <p class="has-text-centered" style="margin-top:1rem; font-size:1.05rem;">
+          [TODO: One-sentence tagline summarizing the paper's key result.]
+        </p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     ABSTRACT
+     TODO: Paste your abstract below.
+     ============================================================ -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          Human videos are a scalable source of supervision for robot manipulation, as they are abundant and naturally capture rich object interactions. However, transferring human demonstrations to robots remains challenging due to embodiment mismatch, scene variation, and robot-specific feasibility constraints. We present <strong>Human2Any</strong>, a framework for learning reusable object-centric interaction priors from human videos without requiring real-world robot demonstrations in the target task contexts. Human2Any represents manipulation through object-object interaction motion, capturing task-relevant scene changes while abstracting away embodiment-specific details. It composes learned interaction priors with robot-side feasibility reasoning and motion planning, allowing the same human-derived knowledge to adapt to different embodiments, scene geometries, and task contexts. We validate Human2Any across diverse manipulation settings, including real-world experiments on a Franka tabletop setup and an RBY-1 humanoid mobile robot, demonstrating robust interaction-centric manipulation without real-world robot training data.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     INTERACTIVE 3D VISUALIZER
+     TODO: configure data paths in static/js/robot-viewer.js
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-three-quarters">
+
+        <h3 class="title is-4 has-text-centered" style="margin-bottom:1rem;">
+          Interactive Planning Visualizer
+        </h3>
+
+        <!-- Trial / sample selectors (buttons injected by robot-viewer.js) -->
+        <div id="rv-trials"
+             style="display:flex; flex-wrap:wrap; gap:0.4rem;
+                    justify-content:center; align-items:center;
+                    margin-bottom:0.5rem;"></div>
+        <div id="rv-samples"
+             style="display:flex; flex-wrap:wrap; gap:0.4rem;
+                    justify-content:center; align-items:center;
+                    margin-bottom:0.75rem;"></div>
+
+        <!-- Three.js canvas container -->
+        <div id="rv-container"
+             style="position:relative; width:100%; height:520px;
+                    border-radius:12px; overflow:hidden; background:#e8e8e8;">
+          <canvas style="width:100%; height:100%; display:block;"></canvas>
+          <div id="rv-status"
+               style="position:absolute; top:50%; left:50%;
+                      transform:translate(-50%,-50%);
+                      font-size:0.9rem; color:#555; pointer-events:none;
+                      text-align:center; max-width:80%;">
+            Initializing…
+          </div>
+        </div>
+
+        <!-- Controls bar -->
+        <div style="display:flex; align-items:center; gap:0.6rem;
+                    margin-top:0.75rem; flex-wrap:wrap;">
+          <button id="rv-btn-play" class="button is-small is-dark"
+                  style="min-width:5.5rem;">▶ Play</button>
+          <input  id="rv-slider"  type="range" min="0" max="0" value="0"
+                  style="flex:1; min-width:100px;">
+          <span   id="rv-frame-label"
+                  style="font-size:0.8rem; min-width:60px;
+                         text-align:right; font-variant-numeric:tabular-nums;">
+            0 / 0
+          </span>
+          <button id="rv-btn-robot" class="button is-small">Hide Robot</button>
+          <button id="rv-btn-pcd"   class="button is-small">Hide Cloud</button>
+          <button id="rv-btn-fit"   class="button is-small">Fit Camera</button>
+        </div>
+
+        <p class="has-text-centered has-text-grey"
+           style="margin-top:0.4rem; font-size:0.8rem;">
+          Drag to rotate &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Right-drag to pan
+        </p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION DIVIDER — Method Overview
+     ============================================================ -->
+<br><br>
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-three-quarters">
+          <h3 class="title is-3" style="text-align:center; padding-bottom:10px;">
+            <strong>Method Overview</strong>
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     METHOD — overview video + pipeline figure
+     TODO: Replace placeholders with your video and figure.
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-three-quarters">
+
+        <!-- Pipeline figure -->
+        <img src="./images/corl26_human2any_pipeline_v4.png" alt="Method pipeline" width="100%" style="border-radius:8px;">
+
+        <p class="has-text-centered has-text-grey" style="margin-top:0.75rem; font-size:0.9rem;">
+          [TODO: Figure caption. Describe the pipeline components labeled in the figure.]
+        </p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION DIVIDER — Real-world Results
+     ============================================================ -->
+<br><br>
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-three-quarters">
+          <h3 class="title is-3" style="text-align:center; padding-bottom:10px;">
+            <strong>Real-world Results</strong>
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     RESULTS — video grids
+     Each block: one h4 headline + one row of 3 videos (or 2).
+     TODO: Duplicate/modify these blocks for your results.
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-three-quarters">
+
+        <!-- Result group 1 -->
+        <h4 class="title is-4" style="text-align:center; padding-bottom:10px;">
+          <strong>[TODO: One bold claim about these three results. E.g., "Our method succeeds on all three manipulation tasks zero-shot."]</strong>
+        </h4>
+        <div class="columns is-centered">
+          <div class="column">
+            <div class="placeholder">
+              <p>Result 1</p>
+              <p class="has-text-grey is-size-7"><code>result_1a.mp4</code></p>
+            </div>
+            <!-- <video playsinline autoplay loop muted src="./static/videos/result_1a.mp4" style="border-radius:10px;"></video> -->
+          </div>
+          <div class="column">
+            <div class="placeholder">
+              <p>Result 2</p>
+              <p class="has-text-grey is-size-7"><code>result_1b.mp4</code></p>
+            </div>
+            <!-- <video playsinline autoplay loop muted src="./static/videos/result_1b.mp4" style="border-radius:10px;"></video> -->
+          </div>
+          <div class="column">
+            <div class="placeholder">
+              <p>Result 3</p>
+              <p class="has-text-grey is-size-7"><code>result_1c.mp4</code></p>
+            </div>
+            <!-- <video playsinline autoplay loop muted src="./static/videos/result_1c.mp4" style="border-radius:10px;"></video> -->
+          </div>
+        </div>
+
+        <!-- Result group 2 -->
+        <h4 class="title is-4" style="text-align:center; padding-bottom:10px;">
+          <strong>[TODO: Second claim. E.g., "Our method handles diverse object configurations."]</strong>
+        </h4>
+        <div class="columns is-centered">
+          <div class="column">
+            <div class="placeholder">
+              <p>Result 4</p>
+              <p class="has-text-grey is-size-7"><code>result_2a.mp4</code></p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="placeholder">
+              <p>Result 5</p>
+              <p class="has-text-grey is-size-7"><code>result_2b.mp4</code></p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="placeholder">
+              <p>Result 6</p>
+              <p class="has-text-grey is-size-7"><code>result_2c.mp4</code></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add more result groups here following the same pattern -->
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION DIVIDER — Qualitative Comparisons
+     ============================================================ -->
+<br><br>
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-three-quarters">
+          <h3 class="title is-3" style="text-align:center; padding-bottom:10px;">
+            <strong>Qualitative Comparisons</strong>
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     COMPARISONS — side-by-side grids
+     TODO: Replace placeholders; adjust labels and filenames.
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-three-quarters">
+
+        <!-- Comparison row 1 -->
+        <h4 class="title is-4" style="text-align:center; padding-bottom:10px;">
+          <strong>[TODO: Describe this comparison. E.g., "Our method succeeds where [Baseline] fails on long-horizon tasks."]</strong>
+        </h4>
+
+        <!-- Column headers -->
+        <div class="columns is-gapless" style="margin-bottom:0.25rem;">
+          <div class="column has-text-centered">
+            <p class="is-size-7 has-text-grey" style="text-transform:uppercase; letter-spacing:.06em; font-weight:600;">
+              [TODO: Baseline name]
+            </p>
+          </div>
+          <div class="column has-text-centered">
+            <p class="is-size-7 has-text-grey" style="text-transform:uppercase; letter-spacing:.06em; font-weight:600;">
+              Ours
+            </p>
+          </div>
+        </div>
+
+        <div class="columns is-gapless">
+          <div class="column">
+            <div class="placeholder">
+              <p>Baseline — Task 1</p>
+              <p class="has-text-grey is-size-7"><code>baseline_task1.mp4</code></p>
+            </div>
+            <!-- <video playsinline autoplay loop muted src="./static/videos/baseline_task1.mp4" style="border-radius:10px 0 0 10px;"></video> -->
+          </div>
+          <div class="column">
+            <div class="placeholder">
+              <p>Ours — Task 1</p>
+              <p class="has-text-grey is-size-7"><code>ours_task1.mp4</code></p>
+            </div>
+            <!-- <video playsinline autoplay loop muted src="./static/videos/ours_task1.mp4" style="border-radius:0 10px 10px 0;"></video> -->
+          </div>
+        </div>
+        <p class="has-text-grey" style="font-size:0.85rem; margin-top:0.4rem; margin-bottom:2rem;">
+          [TODO: Caption — task name, what to notice]
+        </p>
+
+        <!-- Comparison row 2 -->
+        <h4 class="title is-4" style="text-align:center; padding-bottom:10px;">
+          <strong>[TODO: Second comparison claim.]</strong>
+        </h4>
+        <div class="columns is-gapless" style="margin-bottom:0.25rem;">
+          <div class="column has-text-centered">
+            <p class="is-size-7 has-text-grey" style="text-transform:uppercase; letter-spacing:.06em; font-weight:600;">
+              [TODO: Baseline name]
+            </p>
+          </div>
+          <div class="column has-text-centered">
+            <p class="is-size-7 has-text-grey" style="text-transform:uppercase; letter-spacing:.06em; font-weight:600;">
+              Ours
+            </p>
+          </div>
+        </div>
+        <div class="columns is-gapless">
+          <div class="column">
+            <div class="placeholder">
+              <p>Baseline — Task 2</p>
+              <p class="has-text-grey is-size-7"><code>baseline_task2.mp4</code></p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="placeholder">
+              <p>Ours — Task 2</p>
+              <p class="has-text-grey is-size-7"><code>ours_task2.mp4</code></p>
+            </div>
+          </div>
+        </div>
+        <p class="has-text-grey" style="font-size:0.85rem; margin-top:0.4rem; margin-bottom:2rem;">
+          [TODO: Caption]
+        </p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     BIBTEX
+     TODO: Fill in the citation fields.
+     ============================================================ -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{[TODO:lastnameyear],
+  author    = {[TODO: Author One] and [TODO: Author Two] and
+               [TODO: Author Three] and [TODO: Advisor Name]},
+  title     = {[TODO: Full Paper Title]},
+  booktitle = {Conference on Robot Learning (CoRL)},
+  year      = {2026},
+}</code></pre>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>Template from <a href="https://nerfies.github.io">Nerfies</a>.</p>
+    </div>
+  </div>
+</footer>
+
+
+
+<!-- Surface module-load / import failures that would otherwise leave the
+     visualizer stuck silently on "Initializing…". -->
+<script>
+  (function () {
+    var status = document.getElementById('rv-status');
+    function show(msg) {
+      if (status) { status.style.color = '#c00'; status.style.display = '';
+                    status.textContent = msg; }
+    }
+    window.addEventListener('error', function (e) {
+      if (e && e.message) show('Load error: ' + e.message + ' — see browser console.');
+    });
+    window.addEventListener('unhandledrejection', function (e) {
+      var r = e && e.reason; show('Load error: ' + ((r && r.message) || r) + ' — see console.');
+    });
+    setTimeout(function () {
+      if (status && /Initializing/i.test(status.textContent)) {
+        show('Viewer did not start — a script import was likely blocked ' +
+             '(three.js / urdf-loader CDN). Check the browser console.');
+      }
+    }, 10000);
+  })();
+</script>
+
+<script type="module" src="./static/js/robot-viewer.js"></script>
+
+</body>
+</html>

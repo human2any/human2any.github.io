@@ -1,0 +1,80 @@
+{
+  "trials": [
+    {
+      "id": "trial1",
+      "robot": "franka",
+      "label": "franka / trial1",
+      "root": "franka/trial1/",
+      "scene": [
+        "scene/box1.ply",
+        "scene/box2.ply",
+        "scene/static_scene.ply",
+        "scene/target.ply",
+        "scene/tool.ply"
+      ],
+      "samples": [
+        {
+          "id": "sample1",
+          "label": "Sample 1",
+          "trajectory": "sample1/plan_0/trajectory.json",
+          "frames": 103,
+          "segments": 4,
+          "score": 1.5266
+        },
+        {
+          "id": "sample2",
+          "label": "Sample 2",
+          "trajectory": "sample2/plan_0/trajectory.json",
+          "frames": 74,
+          "segments": 4,
+          "score": 1.0
+        }
+      ]
+    },
+    {
+      "id": "trial1",
+      "robot": "rby1",
+      "label": "rby1 / trial1",
+      "root": "rby1/trial1/",
+      "scene": [
+        "scene/static_scene.ply",
+        "scene/target.ply",
+        "scene/tool.ply"
+      ],
+      "samples": [
+        {
+          "id": "sample_2",
+          "label": "Sample 2",
+          "trajectory": "sample_2/plan_0/trajectory.json",
+          "frames": 151,
+          "segments": 5,
+          "score": 3.3512
+        },
+        {
+          "id": "sample_3",
+          "label": "Sample 3",
+          "trajectory": "sample_3/plan_0/trajectory.json",
+          "frames": 92,
+          "segments": 5,
+          "score": 3.0785
+        },
+        {
+          "id": "sample_4",
+          "label": "Sample 4",
+          "trajectory": "sample_4/plan_0/trajectory.json",
+          "frames": 96,
+          "segments": 5,
+          "score": 3.0773
+        },
+        {
+          "id": "sample_1",
+          "label": "Sample 1",
+          "trajectory": "sample_1/plan_0/trajectory.json",
+          "frames": 98,
+          "segments": 5,
+          "score": 3.0759
+        }
+      ]
+    }
+  ]
+}
