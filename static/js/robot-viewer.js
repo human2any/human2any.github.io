@@ -117,6 +117,7 @@ class RobotViewer {
     this._elSamples = document.getElementById('rv-samples');
     this._elPcd     = document.getElementById('rv-btn-pcd');
     this._elRobot   = document.getElementById('rv-btn-robot');
+    this._elRgb     = document.getElementById('rv-rgb');
 
     this._bindUI();
     this._resize();
@@ -163,6 +164,17 @@ class RobotViewer {
     this._activeTrial = i;
     this._trialButtons.forEach((b, k) => b.classList.toggle('is-dark', k === i));
     this._dataRoot = RESULTS_ROOT + t.root;
+
+    // per-trial reference image in the top-left corner (hidden if none)
+    if (this._elRgb) {
+      if (t.rgb) {
+        this._elRgb.src = this._dataRoot + t.rgb;
+        this._elRgb.style.display = '';
+      } else {
+        this._elRgb.removeAttribute('src');
+        this._elRgb.style.display = 'none';
+      }
+    }
 
     await this._ensureRobot(t.robot);          // swap URDF if this trial's robot differs
 

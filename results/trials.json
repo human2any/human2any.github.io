@@ -1,10 +1,10 @@
 {
   "trials": [
     {
-      "id": "trial1",
+      "id": "trial2",
       "robot": "franka",
-      "label": "franka / trial1",
-      "root": "franka/trial1/",
+      "label": "franka / trial2",
+      "root": "franka/trial2/",
       "scene": [
         "scene/box1.ply",
         "scene/box2.ply",
@@ -12,22 +12,39 @@
         "scene/target.ply",
         "scene/tool.ply"
       ],
+      "rgb": "rgb.png",
       "samples": [
+        {
+          "id": "sample4",
+          "label": "Sample 4",
+          "trajectory": "sample4/plan_0/trajectory.json",
+          "frames": 210,
+          "segments": 4,
+          "score": 0.9993
+        },
+        {
+          "id": "sample3",
+          "label": "Sample 3",
+          "trajectory": "sample3/plan_0/trajectory.json",
+          "frames": 171,
+          "segments": 4,
+          "score": 0.8753
+        },
         {
           "id": "sample1",
           "label": "Sample 1",
           "trajectory": "sample1/plan_0/trajectory.json",
-          "frames": 103,
+          "frames": 153,
           "segments": 4,
-          "score": 1.5266
+          "score": 0.8484
         },
         {
           "id": "sample2",
           "label": "Sample 2",
           "trajectory": "sample2/plan_0/trajectory.json",
-          "frames": 74,
+          "frames": 217,
           "segments": 4,
-          "score": 1.0
+          "score": 0.8451
         }
       ]
     },
@@ -41,6 +58,7 @@
         "scene/target.ply",
         "scene/tool.ply"
       ],
+      "rgb": null,
       "samples": [
         {
           "id": "sample_2",
@@ -48,7 +66,7 @@
           "trajectory": "sample_2/plan_0/trajectory.json",
           "frames": 151,
           "segments": 5,
-          "score": 3.3512
+          "score": 0.8378
         },
         {
           "id": "sample_3",
@@ -56,7 +74,7 @@
           "trajectory": "sample_3/plan_0/trajectory.json",
           "frames": 92,
           "segments": 5,
-          "score": 3.0785
+          "score": 0.7696
         },
         {
           "id": "sample_4",
@@ -64,7 +82,7 @@
           "trajectory": "sample_4/plan_0/trajectory.json",
           "frames": 96,
           "segments": 5,
-          "score": 3.0773
+          "score": 0.7693
         },
         {
           "id": "sample_1",
@@ -72,7 +90,7 @@
           "trajectory": "sample_1/plan_0/trajectory.json",
           "frames": 98,
           "segments": 5,
-          "score": 3.0759
+          "score": 0.769
         }
       ]
     }
