@@ -122,18 +122,11 @@
     <div class="columns is-centered">
       <div class="column is-three-quarters">
 
-        <!-- placeholder — remove when you have the video -->
-        <div class="placeholder" style="min-height:360px;">
-          <p><strong>Teaser video</strong></p>
-          <p class="has-text-grey is-size-7"><code>./static/videos/teaser.mp4</code></p>
-        </div>
-        <!--
-        <video playsinline autoplay loop muted controls src="./static/videos/teaser.mp4"
+        <video playsinline autoplay loop muted controls src="./real_demos/mosaic_5x6.mp4"
                width="100%" style="border-radius:16px;"></video>
-        -->
 
         <p class="has-text-centered" style="margin-top:1rem; font-size:1.05rem;">
-          [TODO: One-sentence tagline summarizing the paper's key result.]
+          Human2Any achieves successful real-world rollouts across diverse task contexts and robot embodiments.
         </p>
 
       </div>
@@ -306,165 +299,21 @@
 
         <!-- Result group 1 -->
         <h4 class="title is-4" style="text-align:center; padding-bottom:10px;">
-          <strong>[TODO: One bold claim about these three results. E.g., "Our method succeeds on all three manipulation tasks zero-shot."]</strong>
+          <strong>Real-world rollouts</strong>
         </h4>
         <div class="columns is-centered">
           <div class="column">
-            <div class="placeholder">
-              <p>Result 1</p>
-              <p class="has-text-grey is-size-7"><code>result_1a.mp4</code></p>
-            </div>
-            <!-- <video playsinline autoplay loop muted src="./static/videos/result_1a.mp4" style="border-radius:10px;"></video> -->
+            <video playsinline autoplay loop muted src="./real_demos/row3/case1_success_x4.mp4" style="border-radius:10px; width:100%;"></video>
           </div>
           <div class="column">
-            <div class="placeholder">
-              <p>Result 2</p>
-              <p class="has-text-grey is-size-7"><code>result_1b.mp4</code></p>
-            </div>
-            <!-- <video playsinline autoplay loop muted src="./static/videos/result_1b.mp4" style="border-radius:10px;"></video> -->
+            <video playsinline autoplay loop muted src="./real_demos/row3/case6_success_x4.mp4" style="border-radius:10px; width:100%;"></video>
           </div>
           <div class="column">
-            <div class="placeholder">
-              <p>Result 3</p>
-              <p class="has-text-grey is-size-7"><code>result_1c.mp4</code></p>
-            </div>
-            <!-- <video playsinline autoplay loop muted src="./static/videos/result_1c.mp4" style="border-radius:10px;"></video> -->
-          </div>
-        </div>
-
-        <!-- Result group 2 -->
-        <h4 class="title is-4" style="text-align:center; padding-bottom:10px;">
-          <strong>[TODO: Second claim. E.g., "Our method handles diverse object configurations."]</strong>
-        </h4>
-        <div class="columns is-centered">
-          <div class="column">
-            <div class="placeholder">
-              <p>Result 4</p>
-              <p class="has-text-grey is-size-7"><code>result_2a.mp4</code></p>
-            </div>
-          </div>
-          <div class="column">
-            <div class="placeholder">
-              <p>Result 5</p>
-              <p class="has-text-grey is-size-7"><code>result_2b.mp4</code></p>
-            </div>
-          </div>
-          <div class="column">
-            <div class="placeholder">
-              <p>Result 6</p>
-              <p class="has-text-grey is-size-7"><code>result_2c.mp4</code></p>
-            </div>
+            <video playsinline autoplay loop muted src="./real_demos/row3/case10_success_x8.mp4" style="border-radius:10px; width:100%;"></video>
           </div>
         </div>
 
         <!-- Add more result groups here following the same pattern -->
-
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     SECTION DIVIDER — Qualitative Comparisons
-     ============================================================ -->
-<br><br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-three-quarters">
-          <h3 class="title is-3" style="text-align:center; padding-bottom:10px;">
-            <strong>Qualitative Comparisons</strong>
-          </h3>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     COMPARISONS — side-by-side grids
-     TODO: Replace placeholders; adjust labels and filenames.
-     ============================================================ -->
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-three-quarters">
-
-        <!-- Comparison row 1 -->
-        <h4 class="title is-4" style="text-align:center; padding-bottom:10px;">
-          <strong>[TODO: Describe this comparison. E.g., "Our method succeeds where [Baseline] fails on long-horizon tasks."]</strong>
-        </h4>
-
-        <!-- Column headers -->
-        <div class="columns is-gapless" style="margin-bottom:0.25rem;">
-          <div class="column has-text-centered">
-            <p class="is-size-7 has-text-grey" style="text-transform:uppercase; letter-spacing:.06em; font-weight:600;">
-              [TODO: Baseline name]
-            </p>
-          </div>
-          <div class="column has-text-centered">
-            <p class="is-size-7 has-text-grey" style="text-transform:uppercase; letter-spacing:.06em; font-weight:600;">
-              Ours
-            </p>
-          </div>
-        </div>
-
-        <div class="columns is-gapless">
-          <div class="column">
-            <div class="placeholder">
-              <p>Baseline — Task 1</p>
-              <p class="has-text-grey is-size-7"><code>baseline_task1.mp4</code></p>
-            </div>
-            <!-- <video playsinline autoplay loop muted src="./static/videos/baseline_task1.mp4" style="border-radius:10px 0 0 10px;"></video> -->
-          </div>
-          <div class="column">
-            <div class="placeholder">
-              <p>Ours — Task 1</p>
-              <p class="has-text-grey is-size-7"><code>ours_task1.mp4</code></p>
-            </div>
-            <!-- <video playsinline autoplay loop muted src="./static/videos/ours_task1.mp4" style="border-radius:0 10px 10px 0;"></video> -->
-          </div>
-        </div>
-        <p class="has-text-grey" style="font-size:0.85rem; margin-top:0.4rem; margin-bottom:2rem;">
-          [TODO: Caption — task name, what to notice]
-        </p>
-
-        <!-- Comparison row 2 -->
-        <h4 class="title is-4" style="text-align:center; padding-bottom:10px;">
-          <strong>[TODO: Second comparison claim.]</strong>
-        </h4>
-        <div class="columns is-gapless" style="margin-bottom:0.25rem;">
-          <div class="column has-text-centered">
-            <p class="is-size-7 has-text-grey" style="text-transform:uppercase; letter-spacing:.06em; font-weight:600;">
-              [TODO: Baseline name]
-            </p>
-          </div>
-          <div class="column has-text-centered">
-            <p class="is-size-7 has-text-grey" style="text-transform:uppercase; letter-spacing:.06em; font-weight:600;">
-              Ours
-            </p>
-          </div>
-        </div>
-        <div class="columns is-gapless">
-          <div class="column">
-            <div class="placeholder">
-              <p>Baseline — Task 2</p>
-              <p class="has-text-grey is-size-7"><code>baseline_task2.mp4</code></p>
-            </div>
-          </div>
-          <div class="column">
-            <div class="placeholder">
-              <p>Ours — Task 2</p>
-              <p class="has-text-grey is-size-7"><code>ours_task2.mp4</code></p>
-            </div>
-          </div>
-        </div>
-        <p class="has-text-grey" style="font-size:0.85rem; margin-top:0.4rem; margin-bottom:2rem;">
-          [TODO: Caption]
-        </p>
 
       </div>
     </div>
