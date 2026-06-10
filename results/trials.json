@@ -79,84 +79,84 @@
       "rgb": "rgb.png",
       "samples": [
         {
-          "id": "sample5",
-          "label": "Sample 5",
-          "trajectory": "sample5/plan_0/trajectory.json",
-          "frames": 207,
-          "segments": 4,
-          "score": 1.0
-        },
-        {
-          "id": "sample7",
-          "label": "Sample 7",
-          "trajectory": "sample7/plan_0/trajectory.json",
-          "frames": 207,
-          "segments": 4,
-          "score": 0.9979
-        },
-        {
-          "id": "sample3",
-          "label": "Sample 3",
-          "trajectory": "sample3/plan_0/trajectory.json",
-          "frames": 207,
-          "segments": 4,
-          "score": 0.9972
-        },
-        {
-          "id": "sample9",
-          "label": "Sample 9",
-          "trajectory": "sample9/plan_0/trajectory.json",
-          "frames": 207,
-          "segments": 4,
-          "score": 0.9833
-        },
-        {
-          "id": "sample4",
-          "label": "Sample 4",
-          "trajectory": "sample4/plan_0/trajectory.json",
-          "frames": 339,
-          "segments": 4,
-          "score": 0.8922
-        },
-        {
           "id": "sample2",
           "label": "Sample 2",
           "trajectory": "sample2/plan_0/trajectory.json",
-          "frames": 185,
+          "frames": 207,
           "segments": 4,
-          "score": 0.835
+          "score": 0.9999
         },
         {
           "id": "sample6",
           "label": "Sample 6",
           "trajectory": "sample6/plan_0/trajectory.json",
-          "frames": 143,
+          "frames": 126,
           "segments": 4,
-          "score": 0.823
+          "score": 0.9999
         },
         {
           "id": "sample1",
           "label": "Sample 1",
           "trajectory": "sample1/plan_0/trajectory.json",
-          "frames": 130,
+          "frames": 191,
           "segments": 4,
-          "score": 0.8171
-        },
-        {
-          "id": "sample8",
-          "label": "Sample 8",
-          "trajectory": "sample8/plan_0/trajectory.json",
-          "frames": 142,
-          "segments": 4,
-          "score": 0.7901
+          "score": 0.9995
         },
         {
           "id": "sample10",
           "label": "Sample 10",
           "trajectory": "sample10/plan_0/trajectory.json",
-          "frames": 143,
+          "frames": 210,
           "segments": 4,
-          "score": 0.7879
+          "score": 0.9942
+        },
+        {
+          "id": "sample8",
+          "label": "Sample 8",
+          "trajectory": "sample8/plan_0/trajectory.json",
+          "frames": 173,
+          "segments": 4,
+          "score": 0.8654
+        },
+        {
+          "id": "sample7",
+          "label": "Sample 7",
+          "trajectory": "sample7/plan_0/trajectory.json",
+          "frames": 279,
+          "segments": 4,
+          "score": 0.8217
+        },
+        {
+          "id": "sample9",
+          "label": "Sample 9",
+          "trajectory": "sample9/plan_0/trajectory.json",
+          "frames": 133,
+          "segments": 4,
+          "score": 0.8151
+        },
+        {
+          "id": "sample3",
+          "label": "Sample 3",
+          "trajectory": "sample3/plan_0/trajectory.json",
+          "frames": 154,
+          "segments": 4,
+          "score": 0.8027
+        },
+        {
+          "id": "sample4",
+          "label": "Sample 4",
+          "trajectory": "sample4/plan_0/trajectory.json",
+          "frames": 136,
+          "segments": 4,
+          "score": 0.7942
+        },
+        {
+          "id": "sample5",
+          "label": "Sample 5",
+          "trajectory": "sample5/plan_0/trajectory.json",
+          "frames": 128,
+          "segments": 4,
+          "score": 0.7919
         }
       ]
     },
