@@ -79,14 +79,6 @@
       "rgb": "rgb.png",
       "samples": [
         {
-          "id": "sample2",
-          "label": "Sample 2",
-          "trajectory": "sample2/plan_0/trajectory.json",
-          "frames": 207,
-          "segments": 4,
-          "score": 0.9999
-        },
-        {
           "id": "sample6",
           "label": "Sample 6",
           "trajectory": "sample6/plan_0/trajectory.json",
