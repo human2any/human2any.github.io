@@ -182,9 +182,13 @@
   </link>
   <link name="panda_leftfinger">
     <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="franka_description/meshes/visual/finger.dae"/>
+        <mesh filename="franka_description/meshes/visual/soft_finger.stl"/>
       </geometry>
+      <material name="umi_black">
+        <color rgba="0.03 0.03 0.03 1.0"/>
+      </material>
     </visual>
     <collision>
       <geometry>
@@ -194,10 +198,13 @@
   </link>
   <link name="panda_rightfinger">
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 3.14159265359" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="franka_description/meshes/visual/finger_right.dae"/>
+        <mesh filename="franka_description/meshes/visual/soft_finger.stl"/>
       </geometry>
+      <material name="umi_black">
+        <color rgba="0.03 0.03 0.03 1.0"/>
+      </material>
     </visual>
     <collision>
       <origin rpy="0 0 3.14159265359" xyz="0 0 0"/>
