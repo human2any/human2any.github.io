@@ -144,14 +144,6 @@
       "rgb": "rgb.png",
       "samples": [
         {
-          "id": "sample9",
-          "label": "Sample 9",
-          "trajectory": "sample9/plan_0/trajectory.json",
-          "frames": 160,
-          "segments": 4,
-          "score": 0.9123
-        },
-        {
           "id": "sample6",
           "label": "Sample 6",
           "trajectory": "sample6/plan_0/trajectory.json",
@@ -198,30 +190,6 @@
           "frames": 75,
           "segments": 4,
           "score": 0.6628
-        },
-        {
-          "id": "sample2",
-          "label": "Sample 2",
-          "trajectory": "sample2/plan_0/trajectory.json",
-          "frames": 75,
-          "segments": 4,
-          "score": 0.6623
-        },
-        {
-          "id": "sample3",
-          "label": "Sample 3",
-          "trajectory": "sample3/plan_0/trajectory.json",
-          "frames": 73,
-          "segments": 4,
-          "score": 0.6623
-        },
-        {
-          "id": "sample4",
-          "label": "Sample 4",
-          "trajectory": "sample4/plan_0/trajectory.json",
-          "frames": 75,
-          "segments": 4,
-          "score": 0.6621
         }
       ]
     },
