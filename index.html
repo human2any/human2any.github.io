@@ -259,7 +259,7 @@
         <img src="./images/corl26_human2any_pipeline_v4.png" alt="Method pipeline" width="100%" style="border-radius:8px;">
 
         <p class="has-text-centered has-text-grey" style="margin-top:0.75rem; font-size:0.9rem;">
-          [TODO: Figure caption. Describe the pipeline components labeled in the figure.]
+<strong>Framework overview.</strong> From human videos, <strong>Human2Any</strong> learns object&ndash;object interaction priors between tool and target objects that are independent of embodiment. Separate agent&ndash;object priors capture how a given robot grasps and controls tools. At deployment, the two are composed under the current robot, scene, and task constraints to generate executable manipulation trajectories.
         </p>
 
       </div>
@@ -289,31 +289,101 @@
 
 <!-- ============================================================
      RESULTS — video grids
-     Each block: one h4 headline + one row of 3 videos (or 2).
-     TODO: Duplicate/modify these blocks for your results.
+     Five tasks, each a row of 3 real-world trials.
+     Franka tabletop: PourInBowl, HangMugTree, SortUtensils
+     RBY-1 humanoid:  PourCup, UseRoller
+     Captions adapted from the paper appendix (Fig. 10-14).
      ============================================================ -->
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-three-quarters">
 
-        <!-- Result group 1 -->
-        <h4 class="title is-4" style="text-align:center; padding-bottom:10px;">
-          <strong>Real-world rollouts</strong>
+        <!-- ---------- Franka tabletop ---------- -->
+        <h5 class="subtitle is-5 has-text-centered has-text-grey"
+            style="letter-spacing:0.08em; text-transform:uppercase; margin-bottom:1.5rem;">
+          Franka tabletop
+        </h5>
+
+        <!-- Pour In Bowl -->
+        <h4 class="title is-4 has-text-centered" style="margin-bottom:0.4rem;">
+          <strong>Pour In Bowl</strong>
         </h4>
+        <p class="has-text-centered has-text-grey"
+           style="max-width:760px; margin:0 auto 1rem; font-size:0.9rem;">
+          The robot avoids the kettle, grasps the cup by its handle, and rotates it during the
+          transfer motion to align the cup for pouring into the bowl.
+        </p>
         <div class="columns is-centered">
-          <div class="column">
-            <video playsinline autoplay loop muted src="./real_demos/row3/case1_success_x4.mp4" style="border-radius:10px; width:100%;"></video>
-          </div>
-          <div class="column">
-            <video playsinline autoplay loop muted src="./real_demos/row3/case6_success_x4.mp4" style="border-radius:10px; width:100%;"></video>
-          </div>
-          <div class="column">
-            <video playsinline autoplay loop muted src="./real_demos/row3/case10_success_x8.mp4" style="border-radius:10px; width:100%;"></video>
-          </div>
+          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/pourinbowl/trial1.mp4" style="border-radius:10px; width:100%;"></video></div>
+          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/pourinbowl/trial2.mp4" style="border-radius:10px; width:100%;"></video></div>
+          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/pourinbowl/trial3.mp4" style="border-radius:10px; width:100%;"></video></div>
         </div>
 
-        <!-- Add more result groups here following the same pattern -->
+        <!-- Hang Mug Tree -->
+        <h4 class="title is-4 has-text-centered" style="margin-top:2.5rem; margin-bottom:0.4rem;">
+          <strong>Hang Mug Tree</strong>
+        </h4>
+        <p class="has-text-centered has-text-grey"
+           style="max-width:760px; margin:0 auto 1rem; font-size:0.9rem;">
+          The robot aligns its grasp to avoid non-target objects and reorients the mug on the fly
+          to accurately place the handle onto the mug tree.
+        </p>
+        <div class="columns is-centered">
+          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/hangmugtree/trial1.mp4" style="border-radius:10px; width:100%;"></video></div>
+          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/hangmugtree/trial2.mp4" style="border-radius:10px; width:100%;"></video></div>
+          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/hangmugtree/trial3.mp4" style="border-radius:10px; width:100%;"></video></div>
+        </div>
+
+        <!-- Sort Utensils -->
+        <h4 class="title is-4 has-text-centered" style="margin-top:2.5rem; margin-bottom:0.4rem;">
+          <strong>Sort Utensils</strong>
+        </h4>
+        <p class="has-text-centered has-text-grey"
+           style="max-width:760px; margin:0 auto 1rem; font-size:0.9rem;">
+          The robot sequentially places a bowl onto a plate and a utensil onto the bowl,
+          demonstrating long-horizon skill composition across varying object arrangements and scene layouts.
+        </p>
+        <div class="columns is-centered">
+          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/sortutensils/trial1.mp4" style="border-radius:10px; width:100%;"></video></div>
+          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/sortutensils/trial2.mp4" style="border-radius:10px; width:100%;"></video></div>
+          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/sortutensils/trial3.mp4" style="border-radius:10px; width:100%;"></video></div>
+        </div>
+
+        <!-- ---------- RBY-1 humanoid mobile robot ---------- -->
+        <h5 class="subtitle is-5 has-text-centered has-text-grey"
+            style="letter-spacing:0.08em; text-transform:uppercase; margin-top:3.5rem; margin-bottom:1.5rem;">
+          RBY-1 humanoid mobile robot
+        </h5>
+
+        <!-- Pour Cup -->
+        <h4 class="title is-4 has-text-centered" style="margin-bottom:0.4rem;">
+          <strong>Pour Cup</strong>
+        </h4>
+        <p class="has-text-centered has-text-grey"
+           style="max-width:760px; margin:0 auto 1rem; font-size:0.9rem;">
+          The robot firmly grasps the cup and leverages whole-body motion to pour the pink ball
+          onto the target container.
+        </p>
+        <div class="columns is-centered">
+          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/pourcup/trial1.mp4" style="border-radius:10px; width:100%;"></video></div>
+          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/pourcup/trial2.mp4" style="border-radius:10px; width:100%;"></video></div>
+          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/pourcup/trial3.mp4" style="border-radius:10px; width:100%;"></video></div>
+        </div>
+
+        <!-- Use Roller -->
+        <h4 class="title is-4 has-text-centered" style="margin-top:2.5rem; margin-bottom:0.4rem;">
+          <strong>Use Roller</strong>
+        </h4>
+        <p class="has-text-centered has-text-grey"
+           style="max-width:760px; margin:0 auto 1rem; font-size:0.9rem;">
+          The robot grasps the handle of the roller precisely and moves to press the target dough.
+        </p>
+        <div class="columns is-centered">
+          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/useroller/trial1.mp4" style="border-radius:10px; width:100%;"></video></div>
+          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/useroller/trial3.mp4" style="border-radius:10px; width:100%;"></video></div>
+          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/useroller/trial2.mp4" style="border-radius:10px; width:100%;"></video></div>
+        </div>
 
       </div>
     </div>
