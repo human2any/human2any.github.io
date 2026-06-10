@@ -65,6 +65,102 @@
       ]
     },
     {
+      "id": "trial2",
+      "robot": "franka",
+      "label": "franka / trial2",
+      "root": "franka/trial2/",
+      "scene": [
+        "scene/box1.ply",
+        "scene/box2.ply",
+        "scene/static_scene.ply",
+        "scene/target.ply",
+        "scene/tool.ply"
+      ],
+      "rgb": "rgb.png",
+      "samples": [
+        {
+          "id": "sample2",
+          "label": "Sample 2",
+          "trajectory": "sample2/plan_0/trajectory.json",
+          "frames": 180,
+          "segments": 4,
+          "score": 0.9997
+        },
+        {
+          "id": "sample5",
+          "label": "Sample 5",
+          "trajectory": "sample5/plan_0/trajectory.json",
+          "frames": 229,
+          "segments": 4,
+          "score": 0.999
+        },
+        {
+          "id": "sample10",
+          "label": "Sample 10",
+          "trajectory": "sample10/plan_0/trajectory.json",
+          "frames": 212,
+          "segments": 4,
+          "score": 0.9978
+        },
+        {
+          "id": "sample9",
+          "label": "Sample 9",
+          "trajectory": "sample9/plan_0/trajectory.json",
+          "frames": 218,
+          "segments": 4,
+          "score": 0.9832
+        },
+        {
+          "id": "sample3",
+          "label": "Sample 3",
+          "trajectory": "sample3/plan_0/trajectory.json",
+          "frames": 172,
+          "segments": 4,
+          "score": 0.8741
+        },
+        {
+          "id": "sample6",
+          "label": "Sample 6",
+          "trajectory": "sample6/plan_0/trajectory.json",
+          "frames": 149,
+          "segments": 4,
+          "score": 0.8707
+        },
+        {
+          "id": "sample4",
+          "label": "Sample 4",
+          "trajectory": "sample4/plan_0/trajectory.json",
+          "frames": 148,
+          "segments": 4,
+          "score": 0.8239
+        },
+        {
+          "id": "sample1",
+          "label": "Sample 1",
+          "trajectory": "sample1/plan_0/trajectory.json",
+          "frames": 158,
+          "segments": 4,
+          "score": 0.8149
+        },
+        {
+          "id": "sample7",
+          "label": "Sample 7",
+          "trajectory": "sample7/plan_0/trajectory.json",
+          "frames": 155,
+          "segments": 4,
+          "score": 0.8135
+        },
+        {
+          "id": "sample8",
+          "label": "Sample 8",
+          "trajectory": "sample8/plan_0/trajectory.json",
+          "frames": 126,
+          "segments": 4,
+          "score": 0.8127
+        }
+      ]
+    },
+    {
       "id": "trial1",
       "robot": "rby1",
       "label": "rby1 / trial1",
