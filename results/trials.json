@@ -1,54 +1,6 @@
 {
   "trials": [
     {
-      "id": "trial2",
-      "robot": "franka",
-      "label": "franka / trial2",
-      "root": "franka/trial2/",
-      "scene": [
-        "scene/box1.ply",
-        "scene/box2.ply",
-        "scene/static_scene.ply",
-        "scene/target.ply",
-        "scene/tool.ply"
-      ],
-      "rgb": "rgb.png",
-      "samples": [
-        {
-          "id": "sample4",
-          "label": "Sample 4",
-          "trajectory": "sample4/plan_0/trajectory.json",
-          "frames": 210,
-          "segments": 4,
-          "score": 0.9993
-        },
-        {
-          "id": "sample3",
-          "label": "Sample 3",
-          "trajectory": "sample3/plan_0/trajectory.json",
-          "frames": 171,
-          "segments": 4,
-          "score": 0.8753
-        },
-        {
-          "id": "sample1",
-          "label": "Sample 1",
-          "trajectory": "sample1/plan_0/trajectory.json",
-          "frames": 153,
-          "segments": 4,
-          "score": 0.8484
-        },
-        {
-          "id": "sample2",
-          "label": "Sample 2",
-          "trajectory": "sample2/plan_0/trajectory.json",
-          "frames": 217,
-          "segments": 4,
-          "score": 0.8451
-        }
-      ]
-    },
-    {
       "id": "trial3",
       "robot": "franka",
       "label": "franka / trial3",
@@ -63,66 +15,58 @@
       "rgb": "rgb.png",
       "samples": [
         {
-          "id": "sample9",
-          "label": "Sample 9",
-          "trajectory": "sample9/plan_0/trajectory.json",
+          "id": "sample1",
+          "label": "Sample 1",
+          "trajectory": "sample1/plan_0/trajectory.json",
           "frames": 127,
           "segments": 4,
           "score": 1.0
         },
         {
-          "id": "sample10",
-          "label": "Sample 10",
-          "trajectory": "sample10/plan_0/trajectory.json",
-          "frames": 172,
-          "segments": 4,
-          "score": 0.9999
-        },
-        {
-          "id": "sample4",
-          "label": "Sample 4",
-          "trajectory": "sample4/plan_0/trajectory.json",
-          "frames": 129,
-          "segments": 4,
-          "score": 0.9994
-        },
-        {
-          "id": "sample1",
-          "label": "Sample 1",
-          "trajectory": "sample1/plan_0/trajectory.json",
-          "frames": 168,
-          "segments": 4,
-          "score": 0.9993
-        },
-        {
-          "id": "sample6",
-          "label": "Sample 6",
-          "trajectory": "sample6/plan_0/trajectory.json",
-          "frames": 173,
-          "segments": 4,
-          "score": 0.9984
-        },
-        {
           "id": "sample2",
           "label": "Sample 2",
           "trajectory": "sample2/plan_0/trajectory.json",
-          "frames": 169,
+          "frames": 175,
           "segments": 4,
-          "score": 0.8773
-        },
-        {
-          "id": "sample7",
-          "label": "Sample 7",
-          "trajectory": "sample7/plan_0/trajectory.json",
-          "frames": 183,
-          "segments": 4,
-          "score": 0.8747
+          "score": 0.9998
         },
         {
           "id": "sample5",
           "label": "Sample 5",
           "trajectory": "sample5/plan_0/trajectory.json",
-          "frames": 158,
+          "frames": 125,
+          "segments": 4,
+          "score": 0.9995
+        },
+        {
+          "id": "sample7",
+          "label": "Sample 7",
+          "trajectory": "sample7/plan_0/trajectory.json",
+          "frames": 126,
+          "segments": 4,
+          "score": 0.999
+        },
+        {
+          "id": "sample8",
+          "label": "Sample 8",
+          "trajectory": "sample8/plan_0/trajectory.json",
+          "frames": 197,
+          "segments": 4,
+          "score": 0.8724
+        },
+        {
+          "id": "sample10",
+          "label": "Sample 10",
+          "trajectory": "sample10/plan_0/trajectory.json",
+          "frames": 232,
+          "segments": 4,
+          "score": 0.8693
+        },
+        {
+          "id": "sample6",
+          "label": "Sample 6",
+          "trajectory": "sample6/plan_0/trajectory.json",
+          "frames": 169,
           "segments": 4,
           "score": 0.8498
         },
@@ -130,17 +74,25 @@
           "id": "sample3",
           "label": "Sample 3",
           "trajectory": "sample3/plan_0/trajectory.json",
-          "frames": 223,
+          "frames": 610,
           "segments": 4,
-          "score": 0.8433
+          "score": 0.8333
         },
         {
-          "id": "sample8",
-          "label": "Sample 8",
-          "trajectory": "sample8/plan_0/trajectory.json",
-          "frames": 326,
+          "id": "sample9",
+          "label": "Sample 9",
+          "trajectory": "sample9/plan_0/trajectory.json",
+          "frames": 515,
           "segments": 4,
-          "score": 0.8323
+          "score": 0.8333
+        },
+        {
+          "id": "sample4",
+          "label": "Sample 4",
+          "trajectory": "sample4/plan_0/trajectory.json",
+          "frames": 157,
+          "segments": 4,
+          "score": 0.8326
         }
       ]
     },
