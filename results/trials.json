@@ -260,38 +260,6 @@
           "score": 0.9915
         },
         {
-          "id": "sample_10",
-          "label": "Sample 10",
-          "trajectory": "sample_10/plan_0/trajectory.json",
-          "frames": 115,
-          "segments": 5,
-          "score": 0.9915
-        },
-        {
-          "id": "sample_5",
-          "label": "Sample 5",
-          "trajectory": "sample_5/plan_0/trajectory.json",
-          "frames": 131,
-          "segments": 5,
-          "score": 0.9911
-        },
-        {
-          "id": "sample_8",
-          "label": "Sample 8",
-          "trajectory": "sample_8/plan_0/trajectory.json",
-          "frames": 130,
-          "segments": 5,
-          "score": 0.9911
-        },
-        {
-          "id": "sample_4",
-          "label": "Sample 4",
-          "trajectory": "sample_4/plan_0/trajectory.json",
-          "frames": 132,
-          "segments": 5,
-          "score": 0.9909
-        },
-        {
           "id": "sample_1",
           "label": "Sample 1",
           "trajectory": "sample_1/plan_0/trajectory.json",
