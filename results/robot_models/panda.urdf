@@ -183,7 +183,7 @@
   <link name="panda_leftfinger">
     <visual>
       <geometry>
-        <mesh filename="franka_description/meshes/visual/finger.dae"/>
+        <mesh filename="franka_description/meshes/visual/soft_gripper_finger.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
@@ -196,7 +196,7 @@
     <visual>
       <origin rpy="0 0 3.14159265359" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="franka_description/meshes/visual/finger.dae"/>
+        <mesh filename="franka_description/meshes/visual/soft_gripper_finger.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
