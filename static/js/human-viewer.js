@@ -72,11 +72,6 @@ class HumanViewer {
   _buildDemoButtons() {
     if (!this._elDemos) return;
     this._elDemos.innerHTML = '';
-    const lbl = document.createElement('span');
-    lbl.textContent = 'Demo:';
-    lbl.className = 'is-size-7 has-text-grey';
-    lbl.style.marginRight = '.15rem';
-    this._elDemos.appendChild(lbl);
 
     this._demoButtons = this._demos.map((name, i) => {
       const btn = document.createElement('button');
