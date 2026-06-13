@@ -536,8 +536,21 @@
         <div style="display:flex; gap:0.6rem; margin-top:0.6rem; flex-wrap:wrap; justify-content:center;">
           <button id="dv-btn-fit" class="button is-small">Fit Camera</button>
         </div>
-        <p class="has-text-centered has-text-grey is-size-7" style="margin-top:0.4rem;">
-          Drag to rotate · Scroll to zoom · Right-drag to pan · Color: <span style="color:#e00;">low score</span> → <span style="color:#0b0;">high score</span>
+
+        <!-- Colorbar -->
+        <div style="margin-top:0.9rem; max-width:480px; margin-left:auto; margin-right:auto;">
+          <div style="height:14px; border-radius:5px;
+                      background:linear-gradient(to right, hsl(0,100%,50%), hsl(119,100%,50%));
+                      box-shadow:0 1px 3px rgba(0,0,0,0.15);"></div>
+          <div style="display:flex; justify-content:space-between; margin-top:0.2rem;">
+            <span class="is-size-7 has-text-grey">0.0 (low)</span>
+            <span class="is-size-7 has-text-grey">Score</span>
+            <span class="is-size-7 has-text-grey">1.0 (high)</span>
+          </div>
+        </div>
+
+        <p class="has-text-centered has-text-grey is-size-7" style="margin-top:0.5rem;">
+          Drag to rotate · Scroll to zoom · Right-drag to pan
         </p>
 
       </div>
