@@ -142,15 +142,19 @@ class HumanViewer {
       new THREE.Color().setHSL(t / Math.max(T - 1, 1), 1.0, 0.5)
     );
 
-    // ── Point cloud (static, grey) ──────────────────────────────────────────
+    // ── Point clouds: tool (orange) and target (green) ──────────────────────
     this._pcdGroup = new THREE.Group();
-    const pcdGeo = new THREE.BufferGeometry();
-    pcdGeo.setAttribute('position',
-      new THREE.BufferAttribute(new Float32Array(d.pcd), 3));
-    this._pcdGroup.add(new THREE.Points(
-      pcdGeo,
-      new THREE.PointsMaterial({ size: 0.008, color: 0x939393, sizeAttenuation: true })
-    ));
+    for (const [flat, color] of [
+      [d.pcd_tool,   0xff8c2b],   // tool   = orange
+      [d.pcd_target, 0x2bcc63],   // target = green
+    ]) {
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(flat), 3));
+      this._pcdGroup.add(new THREE.Points(
+        geo,
+        new THREE.PointsMaterial({ size: 0.008, color, sizeAttenuation: true })
+      ));
+    }
     this._world.add(this._pcdGroup);
 
     // ── Track lines — full rainbow paths, always visible ──────────────────

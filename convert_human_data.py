@@ -30,22 +30,20 @@ def convert_demo(demo_dir):
 
     T, N, _ = tracks.shape
 
-    pcd_all  = np.concatenate([tool_pts, tgt_pts], axis=0)       # (2M, 3)
-    flat_pcd = np.round(pcd_all.ravel().astype(np.float64), 3).tolist()
-
     out = {
         "num_frames": int(T),
         "num_tracks": int(N),
-        "tracks":    np.round(tracks.astype(np.float64), 5).tolist(),    # (T, N, 3)
-        "pcd":       flat_pcd,                                           # flat [x,y,z,...]
-        "abs_traj":  np.round(abs_traj.astype(np.float64), 6).tolist(), # (T, 4, 4)
+        "tracks":    np.round(tracks.astype(np.float64), 5).tolist(),        # (T, N, 3)
+        "pcd_tool":  np.round(tool_pts.ravel().astype(np.float64), 3).tolist(),  # flat [x,y,z,...]
+        "pcd_target": np.round(tgt_pts.ravel().astype(np.float64), 3).tolist(),  # flat [x,y,z,...]
+        "abs_traj":  np.round(abs_traj.astype(np.float64), 6).tolist(),      # (T, 4, 4)
     }
 
     with open(out_path, 'w') as f:
         json.dump(out, f, separators=(',', ':'))
 
     mb = os.path.getsize(out_path) / 1e6
-    print(f'  {out_path}  ({mb:.1f} MB)  T={T}  N={N}  pcd_pts={len(pcd_all)}')
+    print(f'  {out_path}  ({mb:.1f} MB)  T={T}  N={N}  tool_pts={len(tool_pts)}  target_pts={len(tgt_pts)}')
 
 
 def main():
