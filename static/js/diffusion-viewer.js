@@ -1,11 +1,15 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { PLYLoader }     from 'three/addons/loaders/PLYLoader.js';
+import { Line2 }         from 'three/addons/lines/Line2.js';
+import { LineGeometry }  from 'three/addons/lines/LineGeometry.js';
+import { LineMaterial }  from 'three/addons/lines/LineMaterial.js';
 
 const DIFFUSION_ROOT = './diffusion/example1/';
 const NUM_STEPS      = 20;   // slider 0 (noisiest) → 19 (cleanest)
+const LINE_WIDTH     = 2.5;  // screen-space pixels
 
-// ── Utility: score [0,1] → THREE.Color red→green ─────────────────────────────
+// ── Utility: score t∈[0,1] → THREE.Color red→green ───────────────────────────
 function scoreColor(t) {
   return new THREE.Color().setHSL(t * 0.33, 1.0, 0.5);
 }
@@ -34,17 +38,19 @@ class DiffPanel {
     this._trajGroup = new THREE.Group();
     this._scene.add(this._trajGroup);
 
-    this._pcdLoaded  = false;
-    this._data       = null;   // reference to method's steps array
-    this._scoreMin   = 0;
-    this._scoreMax   = 1;
+    this._resolution = new THREE.Vector2(
+      this._container.clientWidth, this._container.clientHeight
+    );
+
+    this._data     = null;
+    this._scoreMin = 0;
+    this._scoreMax = 1;
 
     window.addEventListener('resize', () => this._resize());
     this._resize();
     this._renderLoop();
   }
 
-  // Load shared scene PLY (call once)
   async loadScene(url) {
     return new Promise((resolve, reject) => {
       new PLYLoader().load(url, geo => {
@@ -55,7 +61,6 @@ class DiffPanel {
           color: hasColor ? 0xffffff : 0x9aa0a6,
         }));
         this._scene.add(pts);
-        this._pcdLoaded = true;
         resolve();
       }, undefined, reject);
     });
@@ -69,7 +74,8 @@ class DiffPanel {
 
   setStep(sliderIdx) {
     if (!this._data) return;
-    // Clear previous trajectories
+
+    // Dispose previous trajectory objects
     for (const obj of [...this._trajGroup.children]) {
       this._trajGroup.remove(obj);
       obj.traverse(o => {
@@ -82,17 +88,28 @@ class DiffPanel {
     const range = this._scoreMax - this._scoreMin || 1;
 
     for (const { score, trajs } of particles) {
-      const t = (score - this._scoreMin) / range;
+      const t   = (score - this._scoreMin) / range;
       const col = scoreColor(t);
-      const mat = new THREE.LineBasicMaterial({ color: col, transparent: true, opacity: 0.75 });
 
       for (const traj of trajs) {
         if (traj.length < 2) continue;
-        const pos = new Float32Array(traj.length * 3);
-        traj.forEach(([x, y, z], i) => { pos[i*3]=x; pos[i*3+1]=y; pos[i*3+2]=z; });
-        const geo = new THREE.BufferGeometry();
-        geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-        this._trajGroup.add(new THREE.Line(geo, mat));
+
+        // LineGeometry expects a flat [x,y,z, x,y,z, ...] array
+        const flat = new Float32Array(traj.length * 3);
+        traj.forEach(([x, y, z], i) => { flat[i*3]=x; flat[i*3+1]=y; flat[i*3+2]=z; });
+
+        const geo = new LineGeometry();
+        geo.setPositions(flat);
+
+        const mat = new LineMaterial({
+          color: col.getHex(),
+          linewidth: LINE_WIDTH,
+          resolution: this._resolution,
+          transparent: true,
+          opacity: 0.8,
+        });
+
+        this._trajGroup.add(new Line2(geo, mat));
       }
     }
   }
@@ -119,6 +136,7 @@ class DiffPanel {
     this._renderer.setSize(w, h, false);
     this._camera.aspect = w / h;
     this._camera.updateProjectionMatrix();
+    this._resolution.set(w, h);
   }
 
   _renderLoop() {
@@ -131,15 +149,12 @@ class DiffPanel {
 // ── Shared controller ─────────────────────────────────────────────────────────
 class DiffusionViewer {
   constructor() {
-    this._left    = new DiffPanel('dv-left');
-    this._right   = new DiffPanel('dv-right');
-    this._slider  = document.getElementById('dv-slider');
-    this._label   = document.getElementById('dv-step-label');
-    this._step    = 0;
+    this._left   = new DiffPanel('dv-left');
+    this._right  = new DiffPanel('dv-right');
+    this._slider = document.getElementById('dv-slider');
+    this._label  = document.getElementById('dv-step-label');
 
-    this._slider?.addEventListener('input', e => {
-      this._setStep(+e.target.value);
-    });
+    this._slider?.addEventListener('input', e => this._setStep(+e.target.value));
     document.getElementById('dv-btn-fit')?.addEventListener('click', () => {
       this._left.fitCamera();
       this._right.fitCamera();
@@ -165,7 +180,6 @@ class DiffusionViewer {
       this._right.setData(data.ours,    data.score_min, data.score_max);
 
       if (statusEl) statusEl.style.display = 'none';
-
       this._setStep(0);
       this._left.fitCamera();
       this._right.fitCamera();
@@ -176,9 +190,7 @@ class DiffusionViewer {
   }
 
   _setStep(idx) {
-    this._step = idx;
     if (this._slider) this._slider.value = idx;
-    // slider 0 = noisiest = diffusion step 19, slider 19 = cleanest = step 0
     const diffStep = NUM_STEPS - 1 - idx;
     if (this._label) this._label.textContent = `Diffusion Step: ${diffStep}`;
     this._left.setStep(idx);
