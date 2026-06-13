@@ -269,6 +269,82 @@
 
 
 <!-- ============================================================
+     SECTION DIVIDER — Human Data Visualizer
+     ============================================================ -->
+<br><br>
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-three-quarters">
+          <h3 class="title is-3" style="text-align:center; padding-bottom:10px;">
+            <strong>Human Data Visualizer</strong>
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     HUMAN DEMONSTRATION VISUALIZER
+     Interactive 3-D view of point cloud, tracked keypoints,
+     and relative motion extracted from human demonstrations.
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-three-quarters">
+
+        <!-- Demo selector buttons (injected by human-viewer.js) -->
+        <div id="hv-demos"
+             style="display:flex; flex-wrap:wrap; gap:0.4rem;
+                    justify-content:center; align-items:center;
+                    margin-bottom:0.75rem;"></div>
+
+        <!-- Three.js canvas container -->
+        <div id="hv-container"
+             style="position:relative; width:100%; height:520px;
+                    border-radius:12px; overflow:hidden; background:#e8e8e8;">
+          <canvas style="position:absolute; inset:0; width:100%; height:100%;
+                         display:block; z-index:1;"></canvas>
+          <video id="hv-video" playsinline autoplay loop muted
+                 style="position:absolute; top:10px; left:10px; z-index:5;
+                        max-width:32%; max-height:44%; width:auto; height:auto;
+                        border-radius:8px; border:2px solid rgba(255,255,255,0.85);
+                        box-shadow:0 2px 8px rgba(0,0,0,0.35);
+                        display:none; pointer-events:none;"></video>
+          <div id="hv-status"
+               style="position:absolute; top:50%; left:50%; z-index:10;
+                      transform:translate(-50%,-50%);
+                      font-size:0.9rem; color:#555; pointer-events:none;
+                      text-align:center; max-width:80%;">
+            Initializing…
+          </div>
+        </div>
+
+        <!-- Controls bar -->
+        <div style="display:flex; align-items:center; gap:0.6rem;
+                    margin-top:0.75rem; flex-wrap:wrap; justify-content:center;">
+          <button id="hv-btn-tracks" class="button is-small">Hide Tracks</button>
+          <button id="hv-btn-rel"    class="button is-small">Hide Rel Motion</button>
+          <button id="hv-btn-pcd"    class="button is-small">Hide Cloud</button>
+          <button id="hv-btn-fit"    class="button is-small">Fit Camera</button>
+        </div>
+
+        <p class="has-text-centered has-text-grey"
+           style="margin-top:0.4rem; font-size:0.8rem;">
+          Drag to rotate &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Right-drag to pan
+        </p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
      SECTION DIVIDER — Real-world Results
      ============================================================ -->
 <br><br>
@@ -404,13 +480,17 @@
 
 
 <!-- Surface module-load / import failures that would otherwise leave the
-     visualizer stuck silently on "Initializing…". -->
+     visualizers stuck silently on "Initializing…". -->
 <script>
   (function () {
-    var status = document.getElementById('rv-status');
+    var statuses = ['rv-status', 'hv-status'].map(function(id) {
+      return document.getElementById(id);
+    });
     function show(msg) {
-      if (status) { status.style.color = '#c00'; status.style.display = '';
-                    status.textContent = msg; }
+      statuses.forEach(function(el) {
+        if (el) { el.style.color = '#c00'; el.style.display = '';
+                  el.textContent = msg; }
+      });
     }
     window.addEventListener('error', function (e) {
       if (e && e.message) show('Load error: ' + e.message + ' — see browser console.');
@@ -419,15 +499,18 @@
       var r = e && e.reason; show('Load error: ' + ((r && r.message) || r) + ' — see console.');
     });
     setTimeout(function () {
-      if (status && /Initializing/i.test(status.textContent)) {
-        show('Viewer did not start — a script import was likely blocked ' +
-             '(three.js / urdf-loader CDN). Check the browser console.');
-      }
+      statuses.forEach(function(el) {
+        if (el && /Initializing/i.test(el.textContent)) {
+          el.style.color = '#c00';
+          el.textContent = 'Viewer did not start — check browser console.';
+        }
+      });
     }, 10000);
   })();
 </script>
 
 <script type="module" src="./static/js/robot-viewer.js"></script>
+<script type="module" src="./static/js/human-viewer.js"></script>
 
 </body>
 </html>
