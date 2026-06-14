@@ -9,6 +9,18 @@ const DIFFUSION_ROOT = './diffusion/example1/';
 const NUM_STEPS      = 20;   // slider 0 (noisiest) → 19 (cleanest)
 const LINE_WIDTH     = 2.5;  // screen-space pixels
 
+// success/failure per seed per method (from result_True/False.txt files)
+const SEEDS = [
+  { key: 'seed_0',  no_steer: false, ours: true  },
+  { key: 'seed_3',  no_steer: false, ours: true  },
+  { key: 'seed_4',  no_steer: false, ours: false },
+  { key: 'seed_5',  no_steer: true,  ours: true  },
+  { key: 'seed_10', no_steer: false, ours: true  },
+  { key: 'seed_11', no_steer: true,  ours: true  },
+];
+const SUCCESS_COLOR = '#2bcc63';
+const FAIL_COLOR    = '#e03333';
+
 // ── Utility: score t∈[0,1] → THREE.Color red→green ───────────────────────────
 function scoreColor(t) {
   return new THREE.Color().setHSL(t * 0.33, 1.0, 0.5);
@@ -149,16 +161,61 @@ class DiffPanel {
 // ── Shared controller ─────────────────────────────────────────────────────────
 class DiffusionViewer {
   constructor() {
-    this._left   = new DiffPanel('dv-left');
-    this._right  = new DiffPanel('dv-right');
-    this._slider = document.getElementById('dv-slider');
-    this._label  = document.getElementById('dv-step-label');
+    this._left      = new DiffPanel('dv-left');
+    this._right     = new DiffPanel('dv-right');
+    this._slider    = document.getElementById('dv-slider');
+    this._label     = document.getElementById('dv-step-label');
+    this._videoLeft  = document.getElementById('dv-video-left');
+    this._videoRight = document.getElementById('dv-video-right');
+    this._elSeeds   = document.getElementById('dv-seeds');
+    this._seedBtns  = [];
+    this._activeSeed = -1;
 
     this._slider?.addEventListener('input', e => this._setStep(+e.target.value));
     document.getElementById('dv-btn-fit')?.addEventListener('click', () => {
       this._left.fitCamera();
       this._right.fitCamera();
     });
+
+    this._buildSeedButtons();
+  }
+
+  _buildSeedButtons() {
+    if (!this._elSeeds) return;
+    const lbl = document.createElement('span');
+    lbl.textContent = 'Seed:';
+    lbl.className = 'is-size-7 has-text-grey';
+    lbl.style.marginRight = '.15rem';
+    this._elSeeds.appendChild(lbl);
+
+    this._seedBtns = SEEDS.map((s, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'button is-small';
+      btn.textContent = s.key.replace('_', ' ');
+      btn.addEventListener('click', () => this._setSeed(i));
+      this._elSeeds.appendChild(btn);
+      return btn;
+    });
+  }
+
+  _setSeed(i) {
+    if (i === this._activeSeed) return;
+    this._activeSeed = i;
+    this._seedBtns.forEach((b, k) => b.classList.toggle('is-dark', k === i));
+
+    const s = SEEDS[i];
+    const setVideo = (el, method) => {
+      const src = `${DIFFUSION_ROOT}${method}/${s.key}/out.mp4`;
+      const success = s[method === 'no_steer' ? 'no_steer' : 'ours'];
+      el.src = src;
+      el.style.display = '';
+      el.style.borderColor = success ? SUCCESS_COLOR : FAIL_COLOR;
+      el.load();
+      el.play().catch(() => {});
+    };
+
+    if (this._videoLeft)  setVideo(this._videoLeft,  'no_steer');
+    if (this._videoRight) setVideo(this._videoRight, 'ours');
   }
 
   async load() {
@@ -183,6 +240,7 @@ class DiffusionViewer {
       this._setStep(0);
       this._left.fitCamera();
       this._right.fitCamera();
+      this._setSeed(0);
     } catch (err) {
       if (statusEl) { statusEl.textContent = `Error: ${err.message}`; statusEl.style.color = '#c00'; }
       console.error('[DiffusionViewer]', err);
