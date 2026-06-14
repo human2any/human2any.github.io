@@ -196,10 +196,10 @@ class DiffusionViewer {
     lbl.style.marginRight = '.15rem';
     this._elSeeds.appendChild(lbl);
 
-    this._seedBtns = this._manifest.seeds.map(seed => {
+    this._seedBtns = this._manifest.seeds.map((seed, i) => {
       const btn = document.createElement('button');
       btn.className = 'button is-small';
-      btn.textContent = seed.replace('seed_', '');
+      btn.textContent = i;
       btn.addEventListener('click', () =>
         this._setSeed(seed).catch(e => console.error('[DiffusionViewer]', e))
       );
