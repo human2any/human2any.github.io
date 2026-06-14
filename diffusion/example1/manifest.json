@@ -1,8 +1,8 @@
 {
   "seeds": [
     "seed_0",
-    "seed_10",
-    "seed_11",
+    "seed_1",
+    "seed_2",
     "seed_3",
     "seed_4",
     "seed_5"
@@ -12,19 +12,19 @@
   "results": {
     "ours": {
       "seed_0": true,
-      "seed_10": true,
-      "seed_11": true,
-      "seed_3": true,
-      "seed_4": false,
-      "seed_5": true
+      "seed_4": true,
+      "seed_5": true,
+      "seed_1": true,
+      "seed_2": false,
+      "seed_3": true
     },
     "no_steer": {
       "seed_0": false,
-      "seed_10": false,
-      "seed_11": true,
-      "seed_3": false,
       "seed_4": false,
-      "seed_5": true
+      "seed_5": true,
+      "seed_1": false,
+      "seed_2": false,
+      "seed_3": true
     }
   }
 }
