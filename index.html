@@ -579,6 +579,158 @@
 
 
 <!-- ============================================================
+     SECTION DIVIDER — Simulation Results
+     ============================================================ -->
+<br><br>
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-three-quarters">
+          <h3 class="title is-3" style="text-align:center; padding-bottom:10px;">
+            <strong>Simulation Results</strong>
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SIMULATION RESULTS — video grids
+     Two tasks, each a set of simulated rollouts.
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-three-quarters">
+
+        <!-- Setup Table -->
+        <h4 class="title is-4 has-text-centered" style="margin-bottom:0.4rem;">
+          <strong>Setup Table</strong>
+        </h4>
+        <p class="has-text-centered has-text-grey"
+           style="max-width:760px; margin:0 auto 1rem; font-size:0.9rem;">
+          Our framework can solve ultra-long-horizon tasks by directly reusing and composing
+          learned models, adapting to new tasks and scenarios.
+        </p>
+        <div class="columns is-centered is-multiline">
+          <div class="column is-one-third"><video playsinline autoplay loop muted preload="auto" src="./sim_demos/SetupTable/trial_3.mp4" style="border-radius:10px; width:100%;"></video></div>
+          <div class="column is-one-third"><video playsinline autoplay loop muted preload="auto" src="./sim_demos/SetupTable/trial_8.mp4" style="border-radius:10px; width:100%;"></video></div>
+          <div class="column is-one-third"><video playsinline autoplay loop muted preload="auto" src="./sim_demos/SetupTable/trial_10.mp4" style="border-radius:10px; width:100%;"></video></div>
+        </div>
+
+        <!-- Sort Into Cabinet -->
+        <h4 class="title is-4 has-text-centered" style="margin-top:2.5rem; margin-bottom:0.4rem;">
+          <strong>Sort Into Cabinet</strong>
+        </h4>
+        <p class="has-text-centered has-text-grey"
+           style="max-width:760px; margin:0 auto 1rem; font-size:0.9rem;">
+          Our framework can handle articulated objects by generating coordinated motions over movable parts,
+          adapting to complex object structures and interaction dynamics.
+        </p>
+        <div class="columns is-centered is-multiline">
+          <div class="column is-one-third"><video playsinline autoplay loop muted preload="auto" src="./sim_demos/SortIntoCabinet/trial_0.mp4" style="border-radius:10px; width:100%;"></video></div>
+          <div class="column is-one-third"><video playsinline autoplay loop muted preload="auto" src="./sim_demos/SortIntoCabinet/trial_8.mp4" style="border-radius:10px; width:100%;"></video></div>
+          <div class="column is-one-third"><video playsinline autoplay loop muted preload="auto" src="./sim_demos/SortIntoCabinet/trial_11.mp4" style="border-radius:10px; width:100%;"></video></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION DIVIDER — VLM Task Planning
+     ============================================================ -->
+<br><br>
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-three-quarters">
+          <h3 class="title is-3" style="text-align:center; padding-bottom:10px;">
+            <strong>VLM Task Planning</strong>
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     VLM TASK PLANNING
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-three-quarters">
+        <p class="has-text-centered has-text-grey"
+           style="max-width:760px; margin:0 auto 1rem; font-size:0.9rem;">
+          Combined with VLM-based task planning, our framework can be readily extended into a robust
+          TAMP system with automated task decomposition and feasibility-aware motion generation.
+        </p>
+
+        <!-- Hang Mug Tree -->
+        <h4 class="title is-4 has-text-centered" style="margin-top:2.5rem; margin-bottom:1rem;">
+          <strong>Hang Mug Tree</strong>
+        </h4>
+        <p class="has-text-centered" style="margin-bottom:0.4rem;"><strong>GPT 5.2</strong></p>
+        <div class="columns is-mobile" style="margin-bottom:1.2rem;">
+            <div class="column is-one-third" style="padding:0.4rem;"><embed src="./task_planning/SkeletonFranka_GPT/hangmugtree/franka_hang_mug_tree__IMG_1267.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width:100%; aspect-ratio:512/535; border:1px solid #e0e0e0; border-radius:8px;" /></div>
+            <div class="column is-one-third" style="padding:0.4rem;"><embed src="./task_planning/SkeletonFranka_GPT/hangmugtree/franka_hang_mug_tree__IMG_1280.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width:100%; aspect-ratio:512/535; border:1px solid #e0e0e0; border-radius:8px;" /></div>
+            <div class="column is-one-third" style="padding:0.4rem;"><embed src="./task_planning/SkeletonFranka_GPT/hangmugtree/franka_hang_mug_tree__IMG_1285.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width:100%; aspect-ratio:512/535; border:1px solid #e0e0e0; border-radius:8px;" /></div>
+        </div>
+        <p class="has-text-centered" style="margin-bottom:0.4rem;"><strong>Opus 5</strong></p>
+        <div class="columns is-mobile" style="margin-bottom:1.2rem;">
+            <div class="column is-one-third" style="padding:0.4rem;"><embed src="./task_planning/SkeletonFranka_Opus/hang_mug/franka_hang_mug_tree__IMG_1267.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width:100%; aspect-ratio:512/535; border:1px solid #e0e0e0; border-radius:8px;" /></div>
+            <div class="column is-one-third" style="padding:0.4rem;"><embed src="./task_planning/SkeletonFranka_Opus/hang_mug/franka_hang_mug_tree__IMG_1280.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width:100%; aspect-ratio:512/535; border:1px solid #e0e0e0; border-radius:8px;" /></div>
+            <div class="column is-one-third" style="padding:0.4rem;"><embed src="./task_planning/SkeletonFranka_Opus/hang_mug/franka_hang_mug_tree__IMG_1285.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width:100%; aspect-ratio:512/535; border:1px solid #e0e0e0; border-radius:8px;" /></div>
+        </div>
+
+        <!-- Pour In Bowl -->
+        <h4 class="title is-4 has-text-centered" style="margin-top:2.5rem; margin-bottom:1rem;">
+          <strong>Pour In Bowl</strong>
+        </h4>
+        <p class="has-text-centered" style="margin-bottom:0.4rem;"><strong>GPT 5.2</strong></p>
+        <div class="columns is-mobile" style="margin-bottom:1.2rem;">
+            <div class="column is-one-third" style="padding:0.4rem;"><embed src="./task_planning/SkeletonFranka_GPT/pourinbowl/franka_pour_in_bowl__IMG_1212.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width:100%; aspect-ratio:512/535; border:1px solid #e0e0e0; border-radius:8px;" /></div>
+            <div class="column is-one-third" style="padding:0.4rem;"><embed src="./task_planning/SkeletonFranka_GPT/pourinbowl/franka_pour_in_bowl__IMG_1218.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width:100%; aspect-ratio:512/535; border:1px solid #e0e0e0; border-radius:8px;" /></div>
+            <div class="column is-one-third" style="padding:0.4rem;"><embed src="./task_planning/SkeletonFranka_GPT/pourinbowl/franka_pour_in_bowl__IMG_1236.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width:100%; aspect-ratio:512/535; border:1px solid #e0e0e0; border-radius:8px;" /></div>
+        </div>
+        <p class="has-text-centered" style="margin-bottom:0.4rem;"><strong>Opus 5</strong></p>
+        <div class="columns is-mobile" style="margin-bottom:1.2rem;">
+            <div class="column is-one-third" style="padding:0.4rem;"><embed src="./task_planning/SkeletonFranka_Opus/pour/franka_pour_in_bowl__IMG_1212.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width:100%; aspect-ratio:512/535; border:1px solid #e0e0e0; border-radius:8px;" /></div>
+            <div class="column is-one-third" style="padding:0.4rem;"><embed src="./task_planning/SkeletonFranka_Opus/pour/franka_pour_in_bowl__IMG_1218.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width:100%; aspect-ratio:512/535; border:1px solid #e0e0e0; border-radius:8px;" /></div>
+            <div class="column is-one-third" style="padding:0.4rem;"><embed src="./task_planning/SkeletonFranka_Opus/pour/franka_pour_in_bowl__IMG_1236.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width:100%; aspect-ratio:512/535; border:1px solid #e0e0e0; border-radius:8px;" /></div>
+        </div>
+
+        <!-- Sort Utensils -->
+        <h4 class="title is-4 has-text-centered" style="margin-top:2.5rem; margin-bottom:1rem;">
+          <strong>Sort Utensils</strong>
+        </h4>
+        <p class="has-text-centered" style="margin-bottom:0.4rem;"><strong>GPT 5.2</strong></p>
+        <div class="columns is-mobile" style="margin-bottom:1.2rem;">
+            <div class="column is-one-third" style="padding:0.4rem;"><embed src="./task_planning/SkeletonFranka_GPT/sortutensils/franka_sort_utensils__IMG_1334.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width:100%; aspect-ratio:512/535; border:1px solid #e0e0e0; border-radius:8px;" /></div>
+            <div class="column is-one-third" style="padding:0.4rem;"><embed src="./task_planning/SkeletonFranka_GPT/sortutensils/franka_sort_utensils__IMG_1342.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width:100%; aspect-ratio:512/535; border:1px solid #e0e0e0; border-radius:8px;" /></div>
+            <div class="column is-one-third" style="padding:0.4rem;"><embed src="./task_planning/SkeletonFranka_GPT/sortutensils/franka_sort_utensils__IMG_1362.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width:100%; aspect-ratio:512/535; border:1px solid #e0e0e0; border-radius:8px;" /></div>
+        </div>
+        <p class="has-text-centered" style="margin-bottom:0.4rem;"><strong>Opus 5</strong></p>
+        <div class="columns is-mobile" style="margin-bottom:1.2rem;">
+            <div class="column is-one-third" style="padding:0.4rem;"><embed src="./task_planning/SkeletonFranka_Opus/sort/franka_sort_utensils__IMG_1334.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width:100%; aspect-ratio:512/535; border:1px solid #e0e0e0; border-radius:8px;" /></div>
+            <div class="column is-one-third" style="padding:0.4rem;"><embed src="./task_planning/SkeletonFranka_Opus/sort/franka_sort_utensils__IMG_1342.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width:100%; aspect-ratio:512/535; border:1px solid #e0e0e0; border-radius:8px;" /></div>
+            <div class="column is-one-third" style="padding:0.4rem;"><embed src="./task_planning/SkeletonFranka_Opus/sort/franka_sort_utensils__IMG_1362.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" style="width:100%; aspect-ratio:512/535; border:1px solid #e0e0e0; border-radius:8px;" /></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
      FOOTER
      ============================================================ -->
 <footer class="footer">
