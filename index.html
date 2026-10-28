@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="[TODO: One-sentence paper description]">
-  <meta name="keywords" content="[TODO: keyword1], [TODO: keyword2], robot learning, CoRL 2025">
+  <meta name="keywords" content="[TODO: keyword1], [TODO: keyword2], robot learning, CoRL 2026">
   <title>Human2Any</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
@@ -34,711 +34,519 @@
 
 
 <!-- ============================================================
-     HERO — Title · Authors · Links
+     CONTENTS RAIL (fixed, left; hidden below 1100px)
      ============================================================ -->
-<section class="hero">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
+<aside class="contents" aria-label="Page contents">
+  <p>Contents</p>
+  <ol>
+    <li><a href="#abstract">Abstract</a></li>
+    <li><a href="#method">Method overview</a></li>
+    <li><a href="#visualizer">Planning visualizer</a></li>
+    <li><a href="#human-data">Human data</a></li>
+    <li><a href="#results">Real-world results</a></li>
+    <li><a href="#simulation">Simulation results</a></li>
+    <li><a href="#vlm-planning">VLM task planning</a></li>
+    <li><a href="#diffusion">Diffusion</a></li>
+    <li><a href="#paper">Paper &amp; citation</a></li>
+  </ol>
+</aside>
 
-          <h1 class="title is-1 publication-title">
-            Human2Any: Human-to-Robot Transfer via Constraint-Aware Compositional Planning
-          </h1>
 
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              Anonymous Authors
-            </span>
-          </div>
+<main id="top" class="page">
 
-          <div class="is-size-5 publication-authors" style="margin-top: 0.25rem;">
-            <span class="author-block">
-              In submission</a>
-            </span>
-          </div>
+  <!-- ============================================================
+       HERO — Title · Venue · Authors · Links
+       ============================================================ -->
+  <header class="page-hero">
+    <h1>
+      <span class="title-line"><span class="title-acronym">Human2Any:</span> Human-to-Robot Transfer via</span><br class="title-break">
+      <span class="title-line">Constraint-Aware Compositional Planning</span>
+    </h1>
+    <p class="title-venue">Conference on Robot Learning (CoRL) 2026</p>
 
-          <div class="column has-text-centered">
-            <div class="publication-links">
+    <div class="hero-authors">
+      <p class="author-list">
+        <span><a href="https://sites.google.com/view/shuocheng" target="_blank" rel="noopener">Shuo Cheng</a><sup>1</sup></span>
+        <span><a href="https://zhangchuye.github.io/" target="_blank" rel="noopener">Chuye Zhang</a><sup>1</sup></span>
+        <span><a href="https://alfred-cueva.github.io/" target="_blank" rel="noopener">Alfred Cueva</a><sup>1</sup></span>
+        <span><a href="https://caelan.github.io/" target="_blank" rel="noopener">Caelan Garrett</a><sup>2,*</sup></span>
+        <span><a href="https://ai.stanford.edu/~amandlek/" target="_blank" rel="noopener">Ajay Mandlekar</a><sup>2,*</sup></span>
+        <span><a href="https://faculty.cc.gatech.edu/~danfei/" target="_blank" rel="noopener">Danfei Xu</a><sup>1,2</sup></span>
+      </p>
+      <p class="affiliation-list">
+        <span><sup>1</sup>Georgia Institute of Technology</span>
+        <span><sup>2</sup>NVIDIA Corporation</span>
+      </p>
+      <p class="author-note"><sup>*</sup>Equal advising</p>
+    </div>
 
-              <span class="link-block">
-                <a href="[TODO: PDF URL]" target="_blank"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
-                  <span>Paper</span>
-                </a>
-              </span>
+    <!-- Video, Code and X thread have no public URL yet: they render as
+         inactive buttons. Turn each <span> into an <a href="…"> when ready. -->
+    <div class="hero-actions" aria-label="Publication links">
+      <a class="publication-button" href="https://arxiv.org/abs/2606.28813" target="_blank" rel="noopener">
+        <i class="ai ai-arxiv" aria-hidden="true"></i>arXiv
+      </a>
+      <span class="publication-button is-pending" aria-disabled="true" title="Coming soon">
+        <i class="fab fa-youtube" aria-hidden="true"></i>Video
+      </span>
+      <span class="publication-button is-pending" aria-disabled="true" title="Coming soon">
+        <i class="fab fa-github" aria-hidden="true"></i>Code
+      </span>
+      <span class="publication-button is-pending" aria-disabled="true" title="Coming soon">
+        <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>X Thread
+      </span>
+    </div>
 
-              <span class="link-block">
-                <a href="[TODO: arXiv URL]" target="_blank"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="ai ai-arxiv"></i></span>
-                  <span>arXiv</span>
-                </a>
-              </span>
+    <p class="hero-deck">
+      Human2Any learns object-centric interaction priors from human videos, composes them
+      with robot-side feasibility reasoning and motion planning, and deploys them on a Franka
+      arm and an RBY-1 humanoid mobile robot without real-world robot training data.
+    </p>
+  </header>
 
-              <span class="link-block">
-                <a href="[TODO: YouTube URL]" target="_blank"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fab fa-youtube"></i></span>
-                  <span>Video</span>
-                </a>
-              </span>
 
-              <span class="link-block">
-                <a href="[TODO: GitHub URL]" target="_blank"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fab fa-github"></i></span>
-                  <span>Code</span>
-                </a>
-              </span>
+  <!-- ============================================================
+       TEASER VIDEO
+       ============================================================ -->
+  <section class="feature-film" aria-label="Human2Any real-world rollouts">
+    <video playsinline autoplay loop muted controls src="./real_demos/mosaic_5x7.mp4"></video>
+    <p class="caption">Human2Any achieves successful real-world rollouts across diverse task contexts and robot embodiments.</p>
+  </section>
 
-              <!--
-              <span class="link-block">
-                <a href="[TODO: Dataset URL]" target="_blank"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fas fa-database"></i></span>
-                  <span>Dataset</span>
-                </a>
-              </span>
-              -->
 
-            </div>
-          </div>
+  <!-- ============================================================
+       ABSTRACT
+       ============================================================ -->
+  <section id="abstract" class="article-section">
+    <p class="section-kicker">The idea</p>
+    <h2>Abstract</h2>
+    <p class="abstract">
+      Human videos are a scalable source of supervision for robot manipulation, as they are abundant and naturally capture rich object interactions. However, transferring human demonstrations to robots remains challenging due to embodiment mismatch, scene variation, and robot-specific feasibility constraints. We present <strong>Human2Any</strong>, a framework for learning reusable object-centric interaction priors from human videos without requiring real-world robot demonstrations in the target task contexts. Human2Any represents manipulation through object-object interaction motion, capturing task-relevant scene changes while abstracting away embodiment-specific details. It composes learned interaction priors with robot-side feasibility reasoning and motion planning, allowing the same human-derived knowledge to adapt to different embodiments, scene geometries, and task contexts. We validate Human2Any across diverse manipulation settings, including real-world experiments on a Franka tabletop setup and an RBY-1 humanoid mobile robot, demonstrating robust interaction-centric manipulation without real-world robot training data.
+    </p>
+  </section>
 
+
+  <!-- ============================================================
+       METHOD — pipeline figure
+       ============================================================ -->
+  <section id="method" class="article-section">
+    <p class="section-kicker">The method</p>
+    <h2>Method overview</h2>
+    <figure class="figure">
+      <img src="./images/corl26_human2any_pipeline_v4.png" alt="Method pipeline">
+      <figcaption>
+        <strong>Framework overview.</strong> From human videos, <strong>Human2Any</strong> learns object&ndash;object interaction priors between tool and target objects that are independent of embodiment. Separate agent&ndash;object priors capture how a given robot grasps and controls tools. At deployment, the two are composed under the current robot, scene, and task constraints to generate executable manipulation trajectories.
+      </figcaption>
+    </figure>
+  </section>
+
+
+  <!-- ============================================================
+       INTERACTIVE 3D VISUALIZER
+       Data paths are configured in static/js/robot-viewer.js
+       ============================================================ -->
+  <section id="visualizer" class="article-section">
+    <p class="section-kicker">Interactive</p>
+    <h2>Planning visualizer</h2>
+    <div class="viewer">
+      <!-- Trial / sample selectors (buttons injected by robot-viewer.js) -->
+      <div id="rv-trials"
+           style="display:flex; flex-wrap:wrap; gap:0.4rem;
+                  justify-content:center; align-items:center;
+                  margin-bottom:0.5rem;"></div>
+      <div id="rv-samples"
+           style="display:flex; flex-wrap:wrap; gap:0.4rem;
+                  justify-content:center; align-items:center;
+                  margin-bottom:0.75rem;"></div>
+
+      <!-- Three.js canvas container -->
+      <div id="rv-container"
+           style="position:relative; width:100%; height:520px;
+                  border-radius:12px; overflow:hidden; background:#e8e8e8;">
+        <canvas style="position:absolute; inset:0; width:100%; height:100%;
+                       display:block; z-index:1;"></canvas>
+        <!-- per-trial reference image (top-left); src set by robot-viewer.js -->
+        <img id="rv-rgb" alt="trial reference"
+             style="position:absolute; top:10px; left:10px; z-index:5;
+                    transform:translateZ(0);
+                    max-width:30%; max-height:42%; width:auto; height:auto;
+                    border-radius:8px; border:2px solid rgba(255,255,255,0.85);
+                    box-shadow:0 2px 8px rgba(0,0,0,0.35); background:#fff;
+                    display:none; pointer-events:none;">
+        <div id="rv-status"
+             style="position:absolute; top:50%; left:50%; z-index:10;
+                    transform:translate(-50%,-50%);
+                    font-size:0.9rem; color:#555; pointer-events:none;
+                    text-align:center; max-width:80%;">
+          Initializing…
         </div>
       </div>
-    </div>
-  </div>
-</section>
 
-
-<!-- ============================================================
-     TEASER VIDEO
-     TODO: Uncomment the <video> tag and remove the placeholder div.
-     ============================================================ -->
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-three-quarters">
-
-        <video playsinline autoplay loop muted controls src="./real_demos/mosaic_5x7.mp4"
-               width="100%" style="border-radius:16px;"></video>
-
-        <p class="has-text-centered" style="margin-top:1rem; font-size:1.05rem;">
-          Human2Any achieves successful real-world rollouts across diverse task contexts and robot embodiments.
-        </p>
-
+      <!-- Controls bar -->
+      <div style="display:flex; align-items:center; gap:0.6rem;
+                  margin-top:0.75rem; flex-wrap:wrap;">
+        <button id="rv-btn-play" class="button is-small is-dark"
+                style="min-width:5.5rem;">▶ Play</button>
+        <input  id="rv-slider"  type="range" min="0" max="0" value="0"
+                style="flex:1; min-width:100px;">
+        <span   id="rv-frame-label"
+                style="font-size:0.8rem; min-width:60px;
+                       text-align:right; font-variant-numeric:tabular-nums;">
+          0 / 0
+        </span>
+        <button id="rv-btn-robot" class="button is-small">Hide Robot</button>
+        <button id="rv-btn-pcd"   class="button is-small">Hide Cloud</button>
+        <button id="rv-btn-fit"   class="button is-small">Fit Camera</button>
       </div>
+
+      <p class="has-text-centered has-text-grey"
+         style="margin-top:0.4rem; font-size:0.8rem;">
+        Drag to rotate &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Right-drag to pan
+      </p>
     </div>
-  </div>
-</section>
+  </section>
 
 
-<!-- ============================================================
-     ABSTRACT
-     TODO: Paste your abstract below.
-     ============================================================ -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          Human videos are a scalable source of supervision for robot manipulation, as they are abundant and naturally capture rich object interactions. However, transferring human demonstrations to robots remains challenging due to embodiment mismatch, scene variation, and robot-specific feasibility constraints. We present <strong>Human2Any</strong>, a framework for learning reusable object-centric interaction priors from human videos without requiring real-world robot demonstrations in the target task contexts. Human2Any represents manipulation through object-object interaction motion, capturing task-relevant scene changes while abstracting away embodiment-specific details. It composes learned interaction priors with robot-side feasibility reasoning and motion planning, allowing the same human-derived knowledge to adapt to different embodiments, scene geometries, and task contexts. We validate Human2Any across diverse manipulation settings, including real-world experiments on a Franka tabletop setup and an RBY-1 humanoid mobile robot, demonstrating robust interaction-centric manipulation without real-world robot training data.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  <!-- ============================================================
+       HUMAN DEMONSTRATION VISUALIZER
+       Interactive 3-D view of point cloud, tracked keypoints,
+       and relative motion extracted from human demonstrations.
+       ============================================================ -->
+  <section id="human-data" class="article-section">
+    <p class="section-kicker">From human videos</p>
+    <h2>Human data visualizer</h2>
+    <div class="viewer">
+      <!-- Demo selector buttons (injected by human-viewer.js) -->
+      <div id="hv-demos"
+           style="display:flex; flex-wrap:wrap; gap:0.4rem;
+                  justify-content:center; align-items:center;
+                  margin-bottom:0.75rem;"></div>
 
-
-<!-- ============================================================
-     INTERACTIVE 3D VISUALIZER
-     TODO: configure data paths in static/js/robot-viewer.js
-     ============================================================ -->
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-three-quarters">
-
-        <h3 class="title is-4 has-text-centered" style="margin-bottom:1rem;">
-          Interactive Planning Visualizer
-        </h3>
-
-        <!-- Trial / sample selectors (buttons injected by robot-viewer.js) -->
-        <div id="rv-trials"
-             style="display:flex; flex-wrap:wrap; gap:0.4rem;
-                    justify-content:center; align-items:center;
-                    margin-bottom:0.5rem;"></div>
-        <div id="rv-samples"
-             style="display:flex; flex-wrap:wrap; gap:0.4rem;
-                    justify-content:center; align-items:center;
-                    margin-bottom:0.75rem;"></div>
-
-        <!-- Three.js canvas container -->
-        <div id="rv-container"
-             style="position:relative; width:100%; height:520px;
-                    border-radius:12px; overflow:hidden; background:#e8e8e8;">
-          <canvas style="position:absolute; inset:0; width:100%; height:100%;
-                         display:block; z-index:1;"></canvas>
-          <!-- per-trial reference image (top-left); src set by robot-viewer.js -->
-          <img id="rv-rgb" alt="trial reference"
+      <!-- Three.js canvas container -->
+      <div id="hv-container"
+           style="position:relative; width:100%; height:520px;
+                  border-radius:12px; overflow:hidden; background:#e8e8e8;">
+        <canvas style="position:absolute; inset:0; width:100%; height:100%;
+                       display:block; z-index:1;"></canvas>
+        <video id="hv-video" playsinline autoplay loop muted
                style="position:absolute; top:10px; left:10px; z-index:5;
-                      transform:translateZ(0);
-                      max-width:30%; max-height:42%; width:auto; height:auto;
+                      max-width:32%; max-height:44%; width:auto; height:auto;
                       border-radius:8px; border:2px solid rgba(255,255,255,0.85);
-                      box-shadow:0 2px 8px rgba(0,0,0,0.35); background:#fff;
-                      display:none; pointer-events:none;">
-          <div id="rv-status"
-               style="position:absolute; top:50%; left:50%; z-index:10;
-                      transform:translate(-50%,-50%);
-                      font-size:0.9rem; color:#555; pointer-events:none;
-                      text-align:center; max-width:80%;">
-            Initializing…
+                      box-shadow:0 2px 8px rgba(0,0,0,0.35);
+                      display:none; pointer-events:none;"></video>
+        <div id="hv-status"
+             style="position:absolute; top:50%; left:50%; z-index:10;
+                    transform:translate(-50%,-50%);
+                    font-size:0.9rem; color:#555; pointer-events:none;
+                    text-align:center; max-width:80%;">
+          Initializing…
+        </div>
+      </div>
+
+      <!-- Controls bar -->
+      <div style="display:flex; align-items:center; gap:0.6rem;
+                  margin-top:0.75rem; flex-wrap:wrap; justify-content:center;">
+        <button id="hv-btn-tracks" class="button is-small">Hide Tracks</button>
+        <button id="hv-btn-rel"    class="button is-small">Hide Rel Motion</button>
+        <button id="hv-btn-pcd"    class="button is-small">Hide Cloud</button>
+        <button id="hv-btn-fit"    class="button is-small">Fit Camera</button>
+      </div>
+
+      <p class="has-text-centered has-text-grey"
+         style="margin-top:0.4rem; font-size:0.8rem;">
+        Drag to rotate &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Right-drag to pan
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       RESULTS — five tasks, each a row of 3 real-world trials.
+       Captions adapted from the paper appendix (Fig. 10-14).
+       ============================================================ -->
+  <section id="results" class="article-section">
+    <p class="section-kicker">Experiments</p>
+    <h2>Real-world results</h2>
+
+      <p class="results-group">Franka tabletop</p>
+
+      <div class="task">
+        <h3>Pour In Bowl</h3>
+        <p>The robot avoids the kettle, grasps the cup by its handle, and rotates it during the transfer motion to align the cup for pouring into the bowl.</p>
+        <div class="video-row">
+        <video playsinline autoplay loop muted preload="auto" src="./real_demos/pourinbowl/trial1.mp4"></video>
+        <video playsinline autoplay loop muted preload="auto" src="./real_demos/pourinbowl/trial2.mp4"></video>
+        <video playsinline autoplay loop muted preload="auto" src="./real_demos/pourinbowl/trial3.mp4"></video>
+        </div>
+      </div>
+
+      <div class="task">
+        <h3>Hang Mug Tree</h3>
+        <p>The robot aligns its grasp to avoid non-target objects and reorients the mug on the fly to accurately place the handle onto the mug tree across various object arrangements.</p>
+        <div class="video-row">
+        <video playsinline autoplay loop muted preload="auto" src="./real_demos/hangmugtree/trial1.mp4"></video>
+        <video playsinline autoplay loop muted preload="auto" src="./real_demos/hangmugtree/trial2.mp4"></video>
+        <video playsinline autoplay loop muted preload="auto" src="./real_demos/hangmugtree/trial3.mp4"></video>
+        </div>
+      </div>
+
+      <div class="task">
+        <h3>Sort Utensils</h3>
+        <p>The robot sequentially places a bowl onto a plate and a utensil onto the bowl, demonstrating long-horizon skill composition for different scene layouts.</p>
+        <div class="video-row">
+        <video playsinline autoplay loop muted preload="auto" src="./real_demos/sortutensils/trial1.mp4"></video>
+        <video playsinline autoplay loop muted preload="auto" src="./real_demos/sortutensils/trial2.mp4"></video>
+        <video playsinline autoplay loop muted preload="auto" src="./real_demos/sortutensils/trial3.mp4"></video>
+        </div>
+      </div>
+
+      <p class="results-group">RBY-1 humanoid mobile robot</p>
+
+      <div class="task">
+        <h3>Pour Cup</h3>
+        <p>The robot securely grasps the cup and leverages coordinated whole-body motion to pour a variety of cups into the target container.</p>
+        <div class="video-row">
+        <video playsinline autoplay loop muted preload="auto" src="./real_demos/pourcup/trial1.mp4"></video>
+        <video playsinline autoplay loop muted preload="auto" src="./real_demos/pourcup/trial2.mp4"></video>
+        <video playsinline autoplay loop muted preload="auto" src="./real_demos/pourcup/trial3.mp4"></video>
+        </div>
+      </div>
+
+      <div class="task">
+        <h3>Use Roller</h3>
+        <p>The robot grasps the handle of the roller precisely and moves to press the target dough.</p>
+        <div class="video-row">
+        <video playsinline autoplay loop muted preload="auto" src="./real_demos/useroller/trial1.mp4"></video>
+        <video playsinline autoplay loop muted preload="auto" src="./real_demos/useroller/trial3.mp4"></video>
+        <video playsinline autoplay loop muted preload="auto" src="./real_demos/useroller/trial2.mp4"></video>
+        </div>
+      </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       SIMULATION RESULTS — two tasks, each a row of 3 simulated rollouts.
+       ============================================================ -->
+  <section id="simulation" class="article-section">
+    <p class="section-kicker">Experiments</p>
+    <h2>Simulation results</h2>
+
+      <div class="task">
+        <h3>Setup Table</h3>
+        <p>Our framework can solve ultra-long-horizon tasks by directly reusing and composing learned models, adapting to new tasks and scenarios.</p>
+        <div class="video-row">
+        <video playsinline autoplay loop muted preload="auto" src="./sim_demos/SetupTable/trial_3.mp4"></video>
+        <video playsinline autoplay loop muted preload="auto" src="./sim_demos/SetupTable/trial_8.mp4"></video>
+        <video playsinline autoplay loop muted preload="auto" src="./sim_demos/SetupTable/trial_10.mp4"></video>
+        </div>
+      </div>
+
+      <div class="task">
+        <h3>Sort Into Cabinet</h3>
+        <p>Our framework can handle articulated objects by generating coordinated motions over movable parts, adapting to complex object structures and interaction dynamics.</p>
+        <div class="video-row">
+        <video playsinline autoplay loop muted preload="auto" src="./sim_demos/SortIntoCabinet/trial_0.mp4"></video>
+        <video playsinline autoplay loop muted preload="auto" src="./sim_demos/SortIntoCabinet/trial_8.mp4"></video>
+        <video playsinline autoplay loop muted preload="auto" src="./sim_demos/SortIntoCabinet/trial_11.mp4"></video>
+        </div>
+      </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       VLM TASK PLANNING — per task, plans from two VLMs on 3 scenes.
+       ============================================================ -->
+  <section id="vlm-planning" class="article-section">
+    <p class="section-kicker">Extension</p>
+    <h2>VLM task planning</h2>
+    <p class="section-text">
+      Combined with VLM-based task planning, our framework can be readily extended into a robust TAMP system with automated task decomposition and feasibility-aware motion generation.
+    </p>
+
+      <div class="task">
+        <h3>Hang Mug Tree</h3>
+        <p class="model-label">GPT 5.2</p>
+        <div class="image-row">
+          <img src="./task_planning/SkeletonFranka_GPT/hangmugtree/franka_hang_mug_tree__IMG_1267.jpg" alt="Hang Mug Tree plan from GPT 5.2" loading="lazy">
+          <img src="./task_planning/SkeletonFranka_GPT/hangmugtree/franka_hang_mug_tree__IMG_1280.jpg" alt="Hang Mug Tree plan from GPT 5.2" loading="lazy">
+          <img src="./task_planning/SkeletonFranka_GPT/hangmugtree/franka_hang_mug_tree__IMG_1285.jpg" alt="Hang Mug Tree plan from GPT 5.2" loading="lazy">
+        </div>
+        <p class="model-label">Opus 5</p>
+        <div class="image-row">
+          <img src="./task_planning/SkeletonFranka_Opus/hang_mug/franka_hang_mug_tree__IMG_1267.jpg" alt="Hang Mug Tree plan from Opus 5" loading="lazy">
+          <img src="./task_planning/SkeletonFranka_Opus/hang_mug/franka_hang_mug_tree__IMG_1280.jpg" alt="Hang Mug Tree plan from Opus 5" loading="lazy">
+          <img src="./task_planning/SkeletonFranka_Opus/hang_mug/franka_hang_mug_tree__IMG_1285.jpg" alt="Hang Mug Tree plan from Opus 5" loading="lazy">
+        </div>
+      </div>
+
+      <div class="task">
+        <h3>Pour In Bowl</h3>
+        <p class="model-label">GPT 5.2</p>
+        <div class="image-row">
+          <img src="./task_planning/SkeletonFranka_GPT/pourinbowl/franka_pour_in_bowl__IMG_1212.jpg" alt="Pour In Bowl plan from GPT 5.2" loading="lazy">
+          <img src="./task_planning/SkeletonFranka_GPT/pourinbowl/franka_pour_in_bowl__IMG_1218.jpg" alt="Pour In Bowl plan from GPT 5.2" loading="lazy">
+          <img src="./task_planning/SkeletonFranka_GPT/pourinbowl/franka_pour_in_bowl__IMG_1236.jpg" alt="Pour In Bowl plan from GPT 5.2" loading="lazy">
+        </div>
+        <p class="model-label">Opus 5</p>
+        <div class="image-row">
+          <img src="./task_planning/SkeletonFranka_Opus/pour/franka_pour_in_bowl__IMG_1212.jpg" alt="Pour In Bowl plan from Opus 5" loading="lazy">
+          <img src="./task_planning/SkeletonFranka_Opus/pour/franka_pour_in_bowl__IMG_1218.jpg" alt="Pour In Bowl plan from Opus 5" loading="lazy">
+          <img src="./task_planning/SkeletonFranka_Opus/pour/franka_pour_in_bowl__IMG_1236.jpg" alt="Pour In Bowl plan from Opus 5" loading="lazy">
+        </div>
+      </div>
+
+      <div class="task">
+        <h3>Sort Utensils</h3>
+        <p class="model-label">GPT 5.2</p>
+        <div class="image-row">
+          <img src="./task_planning/SkeletonFranka_GPT/sortutensils/franka_sort_utensils__IMG_1334.jpg" alt="Sort Utensils plan from GPT 5.2" loading="lazy">
+          <img src="./task_planning/SkeletonFranka_GPT/sortutensils/franka_sort_utensils__IMG_1342.jpg" alt="Sort Utensils plan from GPT 5.2" loading="lazy">
+          <img src="./task_planning/SkeletonFranka_GPT/sortutensils/franka_sort_utensils__IMG_1362.jpg" alt="Sort Utensils plan from GPT 5.2" loading="lazy">
+        </div>
+        <p class="model-label">Opus 5</p>
+        <div class="image-row">
+          <img src="./task_planning/SkeletonFranka_Opus/sort/franka_sort_utensils__IMG_1334.jpg" alt="Sort Utensils plan from Opus 5" loading="lazy">
+          <img src="./task_planning/SkeletonFranka_Opus/sort/franka_sort_utensils__IMG_1342.jpg" alt="Sort Utensils plan from Opus 5" loading="lazy">
+          <img src="./task_planning/SkeletonFranka_Opus/sort/franka_sort_utensils__IMG_1362.jpg" alt="Sort Utensils plan from Opus 5" loading="lazy">
+        </div>
+      </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       DIFFUSION VISUALIZATION
+       ============================================================ -->
+  <section id="diffusion" class="article-section">
+    <p class="section-kicker">Under the hood</p>
+    <h2>Diffusion visualization</h2>
+    <p class="section-text">
+      We visualize the particles during the diffusion process, with each particle corresponding to a full end-effector trajectory and color-coded according to its score. The execution of the best final particle is demonstrated in the accompanying video.
+    </p>
+    <div class="viewer viewer-wide">
+      <!-- Seed selector -->
+      <div id="dv-seeds" style="display:flex; gap:0.4rem; margin-bottom:0.75rem; flex-wrap:wrap; justify-content:center;"></div>
+
+      <!-- Two panels side by side -->
+      <div style="display:flex; gap:1rem; align-items:flex-start;">
+
+        <!-- Left: No Steering -->
+        <div style="flex:1; min-width:0;">
+          <p class="has-text-centered has-text-weight-semibold"
+             style="margin-bottom:0.4rem; font-size:0.95rem;">No Steering</p>
+          <div id="dv-left"
+               style="position:relative; width:100%; height:420px;
+                      border-radius:10px; overflow:hidden; background:#e8e8e8;">
+            <canvas style="position:absolute; inset:0; width:100%; height:100%; display:block; z-index:1;"></canvas>
+            <video id="dv-video-left" playsinline autoplay loop muted
+                   style="position:absolute; top:10px; left:10px; z-index:5;
+                          max-width:38%; max-height:42%; border-radius:6px;
+                          border:3px solid #2bcc63;
+                          box-shadow:0 2px 8px rgba(0,0,0,0.35); display:none; pointer-events:none;"></video>
+            <div id="dv-status"
+                 style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+                        z-index:10; font-size:0.9rem; color:#555; background:rgba(255,255,255,0.75);
+                        padding:0.3rem 0.8rem; border-radius:6px;">Loading…</div>
           </div>
         </div>
 
-        <!-- Controls bar -->
-        <div style="display:flex; align-items:center; gap:0.6rem;
-                    margin-top:0.75rem; flex-wrap:wrap;">
-          <button id="rv-btn-play" class="button is-small is-dark"
-                  style="min-width:5.5rem;">▶ Play</button>
-          <input  id="rv-slider"  type="range" min="0" max="0" value="0"
-                  style="flex:1; min-width:100px;">
-          <span   id="rv-frame-label"
-                  style="font-size:0.8rem; min-width:60px;
-                         text-align:right; font-variant-numeric:tabular-nums;">
-            0 / 0
-          </span>
-          <button id="rv-btn-robot" class="button is-small">Hide Robot</button>
-          <button id="rv-btn-pcd"   class="button is-small">Hide Cloud</button>
-          <button id="rv-btn-fit"   class="button is-small">Fit Camera</button>
-        </div>
-
-        <p class="has-text-centered has-text-grey"
-           style="margin-top:0.4rem; font-size:0.8rem;">
-          Drag to rotate &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Right-drag to pan
-        </p>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     SECTION DIVIDER — Method Overview
-     ============================================================ -->
-<br><br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-three-quarters">
-          <h3 class="title is-3" style="text-align:center; padding-bottom:10px;">
-            <strong>Method Overview</strong>
-          </h3>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     METHOD — overview video + pipeline figure
-     TODO: Replace placeholders with your video and figure.
-     ============================================================ -->
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-three-quarters">
-
-        <!-- Pipeline figure -->
-        <img src="./images/corl26_human2any_pipeline_v4.png" alt="Method pipeline" width="100%" style="border-radius:8px;">
-
-        <p class="has-text-centered has-text-grey" style="margin-top:0.75rem; font-size:0.9rem;">
-<strong>Framework overview.</strong> From human videos, <strong>Human2Any</strong> learns object&ndash;object interaction priors between tool and target objects that are independent of embodiment. Separate agent&ndash;object priors capture how a given robot grasps and controls tools. At deployment, the two are composed under the current robot, scene, and task constraints to generate executable manipulation trajectories.
-        </p>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     SECTION DIVIDER — Human Data Visualizer
-     ============================================================ -->
-<br><br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-three-quarters">
-          <h3 class="title is-3" style="text-align:center; padding-bottom:10px;">
-            <strong>Human Data Visualizer</strong>
-          </h3>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     HUMAN DEMONSTRATION VISUALIZER
-     Interactive 3-D view of point cloud, tracked keypoints,
-     and relative motion extracted from human demonstrations.
-     ============================================================ -->
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-three-quarters">
-
-        <!-- Demo selector buttons (injected by human-viewer.js) -->
-        <div id="hv-demos"
-             style="display:flex; flex-wrap:wrap; gap:0.4rem;
-                    justify-content:center; align-items:center;
-                    margin-bottom:0.75rem;"></div>
-
-        <!-- Three.js canvas container -->
-        <div id="hv-container"
-             style="position:relative; width:100%; height:520px;
-                    border-radius:12px; overflow:hidden; background:#e8e8e8;">
-          <canvas style="position:absolute; inset:0; width:100%; height:100%;
-                         display:block; z-index:1;"></canvas>
-          <video id="hv-video" playsinline autoplay loop muted
-                 style="position:absolute; top:10px; left:10px; z-index:5;
-                        max-width:32%; max-height:44%; width:auto; height:auto;
-                        border-radius:8px; border:2px solid rgba(255,255,255,0.85);
-                        box-shadow:0 2px 8px rgba(0,0,0,0.35);
-                        display:none; pointer-events:none;"></video>
-          <div id="hv-status"
-               style="position:absolute; top:50%; left:50%; z-index:10;
-                      transform:translate(-50%,-50%);
-                      font-size:0.9rem; color:#555; pointer-events:none;
-                      text-align:center; max-width:80%;">
-            Initializing…
+        <!-- Right: Ours -->
+        <div style="flex:1; min-width:0;">
+          <p class="has-text-centered has-text-weight-semibold"
+             style="margin-bottom:0.4rem; font-size:0.95rem;">Ours</p>
+          <div id="dv-right"
+               style="position:relative; width:100%; height:420px;
+                      border-radius:10px; overflow:hidden; background:#e8e8e8;">
+            <canvas style="position:absolute; inset:0; width:100%; height:100%; display:block; z-index:1;"></canvas>
+            <video id="dv-video-right" playsinline autoplay loop muted
+                   style="position:absolute; top:10px; left:10px; z-index:5;
+                          max-width:38%; max-height:42%; border-radius:6px;
+                          border:3px solid #2bcc63;
+                          box-shadow:0 2px 8px rgba(0,0,0,0.35); display:none; pointer-events:none;"></video>
           </div>
         </div>
 
-        <!-- Controls bar -->
-        <div style="display:flex; align-items:center; gap:0.6rem;
-                    margin-top:0.75rem; flex-wrap:wrap; justify-content:center;">
-          <button id="hv-btn-tracks" class="button is-small">Hide Tracks</button>
-          <button id="hv-btn-rel"    class="button is-small">Hide Rel Motion</button>
-          <button id="hv-btn-pcd"    class="button is-small">Hide Cloud</button>
-          <button id="hv-btn-fit"    class="button is-small">Fit Camera</button>
-        </div>
-
-        <p class="has-text-centered has-text-grey"
-           style="margin-top:0.4rem; font-size:0.8rem;">
-          Drag to rotate &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Right-drag to pan
-        </p>
-
       </div>
-    </div>
-  </div>
-</section>
 
+      <!-- Shared slider row -->
+      <div style="margin-top:0.9rem; display:flex; align-items:center; gap:0.8rem; flex-wrap:wrap;">
+        <span style="font-size:0.85rem; color:#555; white-space:nowrap;">Noisy (Step 19)</span>
+        <input id="dv-slider" type="range" min="0" max="19" value="0"
+               style="flex:1; min-width:120px;">
+        <span style="font-size:0.85rem; color:#555; white-space:nowrap;">Clean (Step 0)</span>
+        <span id="dv-step-label"
+              style="font-size:0.85rem; color:#333; white-space:nowrap; min-width:10rem; text-align:right;">
+          Diffusion Step: 19
+        </span>
+      </div>
 
-<!-- ============================================================
-     SECTION DIVIDER — Real-world Results
-     ============================================================ -->
-<br><br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-three-quarters">
-          <h3 class="title is-3" style="text-align:center; padding-bottom:10px;">
-            <strong>Real-world Results</strong>
-          </h3>
+      <!-- Controls row -->
+      <div style="display:flex; gap:0.6rem; margin-top:0.6rem; flex-wrap:wrap; justify-content:center;">
+        <button id="dv-btn-fit" class="button is-small">Fit Camera</button>
+      </div>
+
+      <!-- Colorbar -->
+      <div style="margin-top:0.9rem; max-width:480px; margin-left:auto; margin-right:auto;">
+        <div style="height:14px; border-radius:5px;
+                    background:linear-gradient(to right, hsl(0,100%,50%), hsl(119,100%,50%));
+                    box-shadow:0 1px 3px rgba(0,0,0,0.15);"></div>
+        <div style="display:flex; justify-content:space-between; margin-top:0.2rem;">
+          <span class="is-size-7 has-text-grey">0.0 (low)</span>
+          <span class="is-size-7 has-text-grey">Score</span>
+          <span class="is-size-7 has-text-grey">1.0 (high)</span>
         </div>
       </div>
+
+      <p class="has-text-centered has-text-grey is-size-7" style="margin-top:0.5rem;">
+        Drag to rotate · Scroll to zoom · Right-drag to pan
+      </p>
     </div>
-  </div>
-</section>
+  </section>
 
 
-<!-- ============================================================
-     RESULTS — video grids
-     Five tasks, each a row of 3 real-world trials.
-     Franka tabletop: PourInBowl, HangMugTree, SortUtensils
-     RBY-1 humanoid:  PourCup, UseRoller
-     Captions adapted from the paper appendix (Fig. 10-14).
-     ============================================================ -->
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-three-quarters">
-
-        <!-- ---------- Franka tabletop ---------- -->
-        <h5 class="subtitle is-5 has-text-centered has-text-grey"
-            style="letter-spacing:0.08em; text-transform:uppercase; margin-bottom:1.5rem;">
-          Franka tabletop
-        </h5>
-
-        <!-- Pour In Bowl -->
-        <h4 class="title is-4 has-text-centered" style="margin-bottom:0.4rem;">
-          <strong>Pour In Bowl</strong>
-        </h4>
-        <p class="has-text-centered has-text-grey"
-           style="max-width:760px; margin:0 auto 1rem; font-size:0.9rem;">
-          The robot avoids the kettle, grasps the cup by its handle, and rotates it during the
-          transfer motion to align the cup for pouring into the bowl.
-        </p>
-        <div class="columns is-centered">
-          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/pourinbowl/trial1.mp4" style="border-radius:10px; width:100%;"></video></div>
-          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/pourinbowl/trial2.mp4" style="border-radius:10px; width:100%;"></video></div>
-          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/pourinbowl/trial3.mp4" style="border-radius:10px; width:100%;"></video></div>
-        </div>
-
-        <!-- Hang Mug Tree -->
-        <h4 class="title is-4 has-text-centered" style="margin-top:2.5rem; margin-bottom:0.4rem;">
-          <strong>Hang Mug Tree</strong>
-        </h4>
-        <p class="has-text-centered has-text-grey"
-           style="max-width:760px; margin:0 auto 1rem; font-size:0.9rem;">
-          The robot aligns its grasp to avoid non-target objects and reorients the mug on the fly
-          to accurately place the handle onto the mug tree across various object arrangements.
-        </p>
-        <div class="columns is-centered">
-          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/hangmugtree/trial1.mp4" style="border-radius:10px; width:100%;"></video></div>
-          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/hangmugtree/trial2.mp4" style="border-radius:10px; width:100%;"></video></div>
-          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/hangmugtree/trial3.mp4" style="border-radius:10px; width:100%;"></video></div>
-        </div>
-
-        <!-- Sort Utensils -->
-        <h4 class="title is-4 has-text-centered" style="margin-top:2.5rem; margin-bottom:0.4rem;">
-          <strong>Sort Utensils</strong>
-        </h4>
-        <p class="has-text-centered has-text-grey"
-           style="max-width:760px; margin:0 auto 1rem; font-size:0.9rem;">
-          The robot sequentially places a bowl onto a plate and a utensil onto the bowl,
-          demonstrating long-horizon skill composition for different scene layouts.
-        </p>
-        <div class="columns is-centered">
-          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/sortutensils/trial1.mp4" style="border-radius:10px; width:100%;"></video></div>
-          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/sortutensils/trial2.mp4" style="border-radius:10px; width:100%;"></video></div>
-          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/sortutensils/trial3.mp4" style="border-radius:10px; width:100%;"></video></div>
-        </div>
-
-        <!-- ---------- RBY-1 humanoid mobile robot ---------- -->
-        <h5 class="subtitle is-5 has-text-centered has-text-grey"
-            style="letter-spacing:0.08em; text-transform:uppercase; margin-top:3.5rem; margin-bottom:1.5rem;">
-          RBY-1 humanoid mobile robot
-        </h5>
-
-        <!-- Pour Cup -->
-        <h4 class="title is-4 has-text-centered" style="margin-bottom:0.4rem;">
-          <strong>Pour Cup</strong>
-        </h4>
-        <p class="has-text-centered has-text-grey"
-           style="max-width:760px; margin:0 auto 1rem; font-size:0.9rem;">
-          The robot securely grasps the cup and leverages coordinated whole-body motion to pour a variety of cups into the target container.
-        </p>
-        <div class="columns is-centered">
-          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/pourcup/trial1.mp4" style="border-radius:10px; width:100%;"></video></div>
-          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/pourcup/trial2.mp4" style="border-radius:10px; width:100%;"></video></div>
-          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/pourcup/trial3.mp4" style="border-radius:10px; width:100%;"></video></div>
-        </div>
-
-        <!-- Use Roller -->
-        <h4 class="title is-4 has-text-centered" style="margin-top:2.5rem; margin-bottom:0.4rem;">
-          <strong>Use Roller</strong>
-        </h4>
-        <p class="has-text-centered has-text-grey"
-           style="max-width:760px; margin:0 auto 1rem; font-size:0.9rem;">
-          The robot grasps the handle of the roller precisely and moves to press the target dough.
-        </p>
-        <div class="columns is-centered">
-          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/useroller/trial1.mp4" style="border-radius:10px; width:100%;"></video></div>
-          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/useroller/trial3.mp4" style="border-radius:10px; width:100%;"></video></div>
-          <div class="column"><video playsinline autoplay loop muted preload="auto" src="./real_demos/useroller/trial2.mp4" style="border-radius:10px; width:100%;"></video></div>
-        </div>
-
+  <!-- ============================================================
+       PAPER + BIBTEX
+       ============================================================ -->
+  <section id="paper" class="paper-section">
+    <div class="paper-copy">
+      <p class="section-kicker">Read the research</p>
+      <h2>Human2Any</h2>
+      <p>Human-to-Robot Transfer via Constraint-Aware Compositional Planning</p>
+      <p>Conference on Robot Learning (CoRL) 2026</p>
+      <div class="paper-actions">
+        <a class="paper-button" href="https://arxiv.org/abs/2606.28813" target="_blank" rel="noopener">Paper &middot; arXiv</a>
       </div>
     </div>
-  </div>
-</section>
 
-
-<!-- ============================================================
-     SECTION DIVIDER — Diffusion Visualization
-     ============================================================ -->
-<br><br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-three-quarters">
-          <h3 class="title is-3" style="text-align:center; padding-bottom:10px;">
-            <strong>Diffusion Visualization</strong>
-          </h3>
-        </div>
+    <div id="citation" class="citation-card">
+      <div class="citation-top">
+        <span>BibTeX</span>
+        <button class="copy-button" type="button" data-copy-citation>Copy</button>
       </div>
+      <pre><code data-citation>@inproceedings{cheng2026human2any,
+  title     = {Human2Any: Human-to-Robot Transfer via
+               Constraint-Aware Compositional Planning},
+  booktitle = {Conference on Robot Learning (CoRL)},
+  author    = {Cheng, Shuo and Zhang, Chuye and Cueva, Alfred and
+               Garrett, Caelan Reed and Mandlekar, Ajay and
+               Xu, Danfei},
+  year      = {2026}
+}</code></pre>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column" style="max-width:1100px;">
-
-        <!-- Caption -->
-        <p class="has-text-centered has-text-grey" style="max-width:840px; margin:0 auto 1rem; font-size:0.9rem;">
-          We visualize the particles during the diffusion process, with each particle corresponding to a full end-effector trajectory and color-coded according to its score. The execution of the best final particle is demonstrated in the accompanying video.
-        </p>
-
-        <!-- Seed selector -->
-        <div id="dv-seeds" style="display:flex; gap:0.4rem; margin-bottom:0.75rem; flex-wrap:wrap; justify-content:center;"></div>
-
-        <!-- Two panels side by side -->
-        <div style="display:flex; gap:1rem; align-items:flex-start;">
-
-          <!-- Left: No Steering -->
-          <div style="flex:1; min-width:0;">
-            <p class="has-text-centered has-text-weight-semibold"
-               style="margin-bottom:0.4rem; font-size:0.95rem;">No Steering</p>
-            <div id="dv-left"
-                 style="position:relative; width:100%; height:420px;
-                        border-radius:10px; overflow:hidden; background:#e8e8e8;">
-              <canvas style="position:absolute; inset:0; width:100%; height:100%; display:block; z-index:1;"></canvas>
-              <video id="dv-video-left" playsinline autoplay loop muted
-                     style="position:absolute; top:10px; left:10px; z-index:5;
-                            max-width:38%; max-height:42%; border-radius:6px;
-                            border:3px solid #2bcc63;
-                            box-shadow:0 2px 8px rgba(0,0,0,0.35); display:none; pointer-events:none;"></video>
-              <div id="dv-status"
-                   style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-                          z-index:10; font-size:0.9rem; color:#555; background:rgba(255,255,255,0.75);
-                          padding:0.3rem 0.8rem; border-radius:6px;">Loading…</div>
-            </div>
-          </div>
-
-          <!-- Right: Ours -->
-          <div style="flex:1; min-width:0;">
-            <p class="has-text-centered has-text-weight-semibold"
-               style="margin-bottom:0.4rem; font-size:0.95rem;">Ours</p>
-            <div id="dv-right"
-                 style="position:relative; width:100%; height:420px;
-                        border-radius:10px; overflow:hidden; background:#e8e8e8;">
-              <canvas style="position:absolute; inset:0; width:100%; height:100%; display:block; z-index:1;"></canvas>
-              <video id="dv-video-right" playsinline autoplay loop muted
-                     style="position:absolute; top:10px; left:10px; z-index:5;
-                            max-width:38%; max-height:42%; border-radius:6px;
-                            border:3px solid #2bcc63;
-                            box-shadow:0 2px 8px rgba(0,0,0,0.35); display:none; pointer-events:none;"></video>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Shared slider row -->
-        <div style="margin-top:0.9rem; display:flex; align-items:center; gap:0.8rem; flex-wrap:wrap;">
-          <span style="font-size:0.85rem; color:#555; white-space:nowrap;">Noisy (Step 19)</span>
-          <input id="dv-slider" type="range" min="0" max="19" value="0"
-                 style="flex:1; min-width:120px;">
-          <span style="font-size:0.85rem; color:#555; white-space:nowrap;">Clean (Step 0)</span>
-          <span id="dv-step-label"
-                style="font-size:0.85rem; color:#333; white-space:nowrap; min-width:10rem; text-align:right;">
-            Diffusion Step: 19
-          </span>
-        </div>
-
-        <!-- Controls row -->
-        <div style="display:flex; gap:0.6rem; margin-top:0.6rem; flex-wrap:wrap; justify-content:center;">
-          <button id="dv-btn-fit" class="button is-small">Fit Camera</button>
-        </div>
-
-        <!-- Colorbar -->
-        <div style="margin-top:0.9rem; max-width:480px; margin-left:auto; margin-right:auto;">
-          <div style="height:14px; border-radius:5px;
-                      background:linear-gradient(to right, hsl(0,100%,50%), hsl(119,100%,50%));
-                      box-shadow:0 1px 3px rgba(0,0,0,0.15);"></div>
-          <div style="display:flex; justify-content:space-between; margin-top:0.2rem;">
-            <span class="is-size-7 has-text-grey">0.0 (low)</span>
-            <span class="is-size-7 has-text-grey">Score</span>
-            <span class="is-size-7 has-text-grey">1.0 (high)</span>
-          </div>
-        </div>
-
-        <p class="has-text-centered has-text-grey is-size-7" style="margin-top:0.5rem;">
-          Drag to rotate · Scroll to zoom · Right-drag to pan
-        </p>
-
-
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     SECTION DIVIDER — Simulation Results
-     ============================================================ -->
-<br><br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-three-quarters">
-          <h3 class="title is-3" style="text-align:center; padding-bottom:10px;">
-            <strong>Simulation Results</strong>
-          </h3>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     SIMULATION RESULTS — video grids
-     Two tasks, each a set of simulated rollouts.
-     ============================================================ -->
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-three-quarters">
-
-        <!-- Setup Table -->
-        <h4 class="title is-4 has-text-centered" style="margin-bottom:0.4rem;">
-          <strong>Setup Table</strong>
-        </h4>
-        <p class="has-text-centered has-text-grey"
-           style="max-width:760px; margin:0 auto 1rem; font-size:0.9rem;">
-          Our framework can solve ultra-long-horizon tasks by directly reusing and composing
-          learned models, adapting to new tasks and scenarios.
-        </p>
-        <div class="columns is-centered is-multiline">
-          <div class="column is-one-third"><video playsinline autoplay loop muted preload="auto" src="./sim_demos/SetupTable/trial_3.mp4" style="border-radius:10px; width:100%;"></video></div>
-          <div class="column is-one-third"><video playsinline autoplay loop muted preload="auto" src="./sim_demos/SetupTable/trial_8.mp4" style="border-radius:10px; width:100%;"></video></div>
-          <div class="column is-one-third"><video playsinline autoplay loop muted preload="auto" src="./sim_demos/SetupTable/trial_10.mp4" style="border-radius:10px; width:100%;"></video></div>
-        </div>
-
-        <!-- Sort Into Cabinet -->
-        <h4 class="title is-4 has-text-centered" style="margin-top:2.5rem; margin-bottom:0.4rem;">
-          <strong>Sort Into Cabinet</strong>
-        </h4>
-        <p class="has-text-centered has-text-grey"
-           style="max-width:760px; margin:0 auto 1rem; font-size:0.9rem;">
-          Our framework can handle articulated objects by generating coordinated motions over movable parts,
-          adapting to complex object structures and interaction dynamics.
-        </p>
-        <div class="columns is-centered is-multiline">
-          <div class="column is-one-third"><video playsinline autoplay loop muted preload="auto" src="./sim_demos/SortIntoCabinet/trial_0.mp4" style="border-radius:10px; width:100%;"></video></div>
-          <div class="column is-one-third"><video playsinline autoplay loop muted preload="auto" src="./sim_demos/SortIntoCabinet/trial_8.mp4" style="border-radius:10px; width:100%;"></video></div>
-          <div class="column is-one-third"><video playsinline autoplay loop muted preload="auto" src="./sim_demos/SortIntoCabinet/trial_11.mp4" style="border-radius:10px; width:100%;"></video></div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     SECTION DIVIDER — VLM Task Planning
-     ============================================================ -->
-<br><br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-three-quarters">
-          <h3 class="title is-3" style="text-align:center; padding-bottom:10px;">
-            <strong>VLM Task Planning</strong>
-          </h3>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     VLM TASK PLANNING
-     ============================================================ -->
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-three-quarters">
-        <p class="has-text-centered has-text-grey"
-           style="max-width:760px; margin:0 auto 1rem; font-size:0.9rem;">
-          Combined with VLM-based task planning, our framework can be readily extended into a robust
-          TAMP system with automated task decomposition and feasibility-aware motion generation.
-        </p>
-
-        <!-- Hang Mug Tree -->
-        <h4 class="title is-4 has-text-centered" style="margin-top:2.5rem; margin-bottom:1rem;">
-          <strong>Hang Mug Tree</strong>
-        </h4>
-        <p class="has-text-centered" style="margin-bottom:0.4rem;"><strong>GPT 5.2</strong></p>
-        <div class="columns is-mobile" style="margin-bottom:1.2rem;">
-            <div class="column is-one-third" style="padding:0.4rem;"><img src="./task_planning/SkeletonFranka_GPT/hangmugtree/franka_hang_mug_tree__IMG_1267.jpg" alt="Hang Mug Tree — GPT 5.2" style="width:100%; display:block; border:1px solid #e0e0e0; border-radius:8px;" /></div>
-            <div class="column is-one-third" style="padding:0.4rem;"><img src="./task_planning/SkeletonFranka_GPT/hangmugtree/franka_hang_mug_tree__IMG_1280.jpg" alt="Hang Mug Tree — GPT 5.2" style="width:100%; display:block; border:1px solid #e0e0e0; border-radius:8px;" /></div>
-            <div class="column is-one-third" style="padding:0.4rem;"><img src="./task_planning/SkeletonFranka_GPT/hangmugtree/franka_hang_mug_tree__IMG_1285.jpg" alt="Hang Mug Tree — GPT 5.2" style="width:100%; display:block; border:1px solid #e0e0e0; border-radius:8px;" /></div>
-        </div>
-        <p class="has-text-centered" style="margin-bottom:0.4rem;"><strong>Opus 5</strong></p>
-        <div class="columns is-mobile" style="margin-bottom:1.2rem;">
-            <div class="column is-one-third" style="padding:0.4rem;"><img src="./task_planning/SkeletonFranka_Opus/hang_mug/franka_hang_mug_tree__IMG_1267.jpg" alt="Hang Mug Tree — Opus 5" style="width:100%; display:block; border:1px solid #e0e0e0; border-radius:8px;" /></div>
-            <div class="column is-one-third" style="padding:0.4rem;"><img src="./task_planning/SkeletonFranka_Opus/hang_mug/franka_hang_mug_tree__IMG_1280.jpg" alt="Hang Mug Tree — Opus 5" style="width:100%; display:block; border:1px solid #e0e0e0; border-radius:8px;" /></div>
-            <div class="column is-one-third" style="padding:0.4rem;"><img src="./task_planning/SkeletonFranka_Opus/hang_mug/franka_hang_mug_tree__IMG_1285.jpg" alt="Hang Mug Tree — Opus 5" style="width:100%; display:block; border:1px solid #e0e0e0; border-radius:8px;" /></div>
-        </div>
-
-        <!-- Pour In Bowl -->
-        <h4 class="title is-4 has-text-centered" style="margin-top:2.5rem; margin-bottom:1rem;">
-          <strong>Pour In Bowl</strong>
-        </h4>
-        <p class="has-text-centered" style="margin-bottom:0.4rem;"><strong>GPT 5.2</strong></p>
-        <div class="columns is-mobile" style="margin-bottom:1.2rem;">
-            <div class="column is-one-third" style="padding:0.4rem;"><img src="./task_planning/SkeletonFranka_GPT/pourinbowl/franka_pour_in_bowl__IMG_1212.jpg" alt="Pour In Bowl — GPT 5.2" style="width:100%; display:block; border:1px solid #e0e0e0; border-radius:8px;" /></div>
-            <div class="column is-one-third" style="padding:0.4rem;"><img src="./task_planning/SkeletonFranka_GPT/pourinbowl/franka_pour_in_bowl__IMG_1218.jpg" alt="Pour In Bowl — GPT 5.2" style="width:100%; display:block; border:1px solid #e0e0e0; border-radius:8px;" /></div>
-            <div class="column is-one-third" style="padding:0.4rem;"><img src="./task_planning/SkeletonFranka_GPT/pourinbowl/franka_pour_in_bowl__IMG_1236.jpg" alt="Pour In Bowl — GPT 5.2" style="width:100%; display:block; border:1px solid #e0e0e0; border-radius:8px;" /></div>
-        </div>
-        <p class="has-text-centered" style="margin-bottom:0.4rem;"><strong>Opus 5</strong></p>
-        <div class="columns is-mobile" style="margin-bottom:1.2rem;">
-            <div class="column is-one-third" style="padding:0.4rem;"><img src="./task_planning/SkeletonFranka_Opus/pour/franka_pour_in_bowl__IMG_1212.jpg" alt="Pour In Bowl — Opus 5" style="width:100%; display:block; border:1px solid #e0e0e0; border-radius:8px;" /></div>
-            <div class="column is-one-third" style="padding:0.4rem;"><img src="./task_planning/SkeletonFranka_Opus/pour/franka_pour_in_bowl__IMG_1218.jpg" alt="Pour In Bowl — Opus 5" style="width:100%; display:block; border:1px solid #e0e0e0; border-radius:8px;" /></div>
-            <div class="column is-one-third" style="padding:0.4rem;"><img src="./task_planning/SkeletonFranka_Opus/pour/franka_pour_in_bowl__IMG_1236.jpg" alt="Pour In Bowl — Opus 5" style="width:100%; display:block; border:1px solid #e0e0e0; border-radius:8px;" /></div>
-        </div>
-
-        <!-- Sort Utensils -->
-        <h4 class="title is-4 has-text-centered" style="margin-top:2.5rem; margin-bottom:1rem;">
-          <strong>Sort Utensils</strong>
-        </h4>
-        <p class="has-text-centered" style="margin-bottom:0.4rem;"><strong>GPT 5.2</strong></p>
-        <div class="columns is-mobile" style="margin-bottom:1.2rem;">
-            <div class="column is-one-third" style="padding:0.4rem;"><img src="./task_planning/SkeletonFranka_GPT/sortutensils/franka_sort_utensils__IMG_1334.jpg" alt="Sort Utensils — GPT 5.2" style="width:100%; display:block; border:1px solid #e0e0e0; border-radius:8px;" /></div>
-            <div class="column is-one-third" style="padding:0.4rem;"><img src="./task_planning/SkeletonFranka_GPT/sortutensils/franka_sort_utensils__IMG_1342.jpg" alt="Sort Utensils — GPT 5.2" style="width:100%; display:block; border:1px solid #e0e0e0; border-radius:8px;" /></div>
-            <div class="column is-one-third" style="padding:0.4rem;"><img src="./task_planning/SkeletonFranka_GPT/sortutensils/franka_sort_utensils__IMG_1362.jpg" alt="Sort Utensils — GPT 5.2" style="width:100%; display:block; border:1px solid #e0e0e0; border-radius:8px;" /></div>
-        </div>
-        <p class="has-text-centered" style="margin-bottom:0.4rem;"><strong>Opus 5</strong></p>
-        <div class="columns is-mobile" style="margin-bottom:1.2rem;">
-            <div class="column is-one-third" style="padding:0.4rem;"><img src="./task_planning/SkeletonFranka_Opus/sort/franka_sort_utensils__IMG_1334.jpg" alt="Sort Utensils — Opus 5" style="width:100%; display:block; border:1px solid #e0e0e0; border-radius:8px;" /></div>
-            <div class="column is-one-third" style="padding:0.4rem;"><img src="./task_planning/SkeletonFranka_Opus/sort/franka_sort_utensils__IMG_1342.jpg" alt="Sort Utensils — Opus 5" style="width:100%; display:block; border:1px solid #e0e0e0; border-radius:8px;" /></div>
-            <div class="column is-one-third" style="padding:0.4rem;"><img src="./task_planning/SkeletonFranka_Opus/sort/franka_sort_utensils__IMG_1362.jpg" alt="Sort Utensils — Opus 5" style="width:100%; display:block; border:1px solid #e0e0e0; border-radius:8px;" /></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+</main>
 
 
 <!-- ============================================================
      FOOTER
      ============================================================ -->
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <p>Template from <a href="https://nerfies.github.io">Nerfies</a>.</p>
-    </div>
-  </div>
+<footer class="page-footer">
+  <p class="wordmark">Human2Any</p>
+  <p>CoRL 2026</p>
+  <p>Inspired by <a href="https://adept-dexterity.github.io/" target="_blank" rel="noopener">ADEPT</a></p>
 </footer>
 
 
