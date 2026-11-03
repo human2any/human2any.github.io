@@ -8,6 +8,10 @@ Expected files in vis_data/:
   tool_pts.npy        (M, 3)     – tool object point cloud
   target_pts.npy      (M, 3)     – target object point cloud
 
+Optional (drawn by the viewer as a background scene cloud when present):
+  scene_pts.npy       (S, 3)     – dense scene point cloud, same camera frame
+  scene_rgb.npy       (S, 3)     – its colors, uint8 0-255 or float 0-1
+
 Usage:
   python3 convert_human_data.py                  # converts all human_data/* dirs
   python3 convert_human_data.py human_data/aria_1
@@ -38,6 +42,17 @@ def convert_demo(demo_dir):
         "pcd_target": np.round(tgt_pts.ravel().astype(np.float64), 3).tolist(),  # flat [x,y,z,...]
         "abs_traj":  np.round(abs_traj.astype(np.float64), 6).tolist(),      # (T, 4, 4)
     }
+
+    scene_path = os.path.join(vd, 'scene_pts.npy')
+    if os.path.isfile(scene_path):
+        scene = np.load(scene_path)                                          # (S, 3)
+        out["pcd_scene"] = np.round(scene.ravel().astype(np.float64), 3).tolist()
+        rgb_path = os.path.join(vd, 'scene_rgb.npy')
+        if os.path.isfile(rgb_path):
+            rgb = np.load(rgb_path).astype(np.float64)                       # (S, 3)
+            if rgb.max() <= 1.0:
+                rgb = rgb * 255.0
+            out["pcd_scene_rgb"] = np.clip(np.round(rgb), 0, 255).astype(int).ravel().tolist()
 
     with open(out_path, 'w') as f:
         json.dump(out, f, separators=(',', ':'))

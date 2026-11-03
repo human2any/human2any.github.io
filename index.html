@@ -243,17 +243,39 @@
         </div>
       </div>
 
-      <!-- Controls bar -->
+      <!-- Playback bar: the inset video is the clock, the slider scrubs both -->
       <div style="display:flex; align-items:center; gap:0.6rem;
-                  margin-top:0.75rem; flex-wrap:wrap; justify-content:center;">
-        <button id="hv-btn-tracks" class="button is-small">Hide Tracks</button>
-        <button id="hv-btn-rel"    class="button is-small">Hide Rel Motion</button>
-        <button id="hv-btn-pcd"    class="button is-small">Hide Cloud</button>
-        <button id="hv-btn-fit"    class="button is-small">Fit Camera</button>
+                  margin-top:0.75rem; flex-wrap:wrap;">
+        <button id="hv-btn-play" class="button is-small is-dark"
+                style="min-width:5.5rem;">⏸ Pause</button>
+        <input  id="hv-slider"  type="range" min="0" max="0" value="0"
+                style="flex:1; min-width:100px;">
+        <span   id="hv-frame-label"
+                style="font-size:0.8rem; min-width:60px;
+                       text-align:right; font-variant-numeric:tabular-nums;">
+          0 / 0
+        </span>
+      </div>
+
+      <!-- Layer and view controls -->
+      <div style="display:flex; align-items:center; gap:0.6rem;
+                  margin-top:0.5rem; flex-wrap:wrap; justify-content:center;">
+        <button id="hv-btn-tracks"  class="button is-small">Hide Tracks</button>
+        <button id="hv-btn-full"    class="button is-small">Full Paths</button>
+        <button id="hv-btn-rel"     class="button is-small">Hide Rel Motion</button>
+        <button id="hv-btn-pcd"     class="button is-small">Hide Cloud</button>
+        <button id="hv-btn-camview" class="button is-small">Camera View</button>
+        <button id="hv-btn-orbit"   class="button is-small">Stop Orbit</button>
+        <button id="hv-btn-fit"     class="button is-small">Fit Camera</button>
       </div>
 
       <p class="has-text-centered has-text-grey"
          style="margin-top:0.4rem; font-size:0.8rem;">
+        Rainbow trails: 3D tracks on the tool, colored as in the video &nbsp;·&nbsp;
+        Orange: tool &nbsp;·&nbsp; Green: target &nbsp;·&nbsp; Axes: tool pose
+      </p>
+      <p class="has-text-centered has-text-grey"
+         style="margin-top:0.1rem; font-size:0.8rem;">
         Drag to rotate &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Right-drag to pan
       </p>
     </div>
