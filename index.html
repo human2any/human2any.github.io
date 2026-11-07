@@ -41,8 +41,8 @@
   <ol>
     <li><a href="#abstract">Abstract</a></li>
     <li><a href="#method">Method overview</a></li>
-    <li><a href="#visualizer">Planning visualizer</a></li>
     <li><a href="#human-data">Human data</a></li>
+    <li><a href="#visualizer">Planning visualizer</a></li>
     <li><a href="#results">Real-world results</a></li>
     <li><a href="#simulation">Simulation results</a></li>
     <li><a href="#vlm-planning">VLM task planning</a></li>
@@ -142,72 +142,6 @@
 
 
   <!-- ============================================================
-       INTERACTIVE 3D VISUALIZER
-       Data paths are configured in static/js/robot-viewer.js
-       ============================================================ -->
-  <section id="visualizer" class="article-section">
-    <p class="section-kicker">Interactive</p>
-    <h2>Planning visualizer</h2>
-    <div class="viewer">
-      <!-- Trial / sample selectors (buttons injected by robot-viewer.js) -->
-      <div id="rv-trials"
-           style="display:flex; flex-wrap:wrap; gap:0.4rem;
-                  justify-content:center; align-items:center;
-                  margin-bottom:0.5rem;"></div>
-      <div id="rv-samples"
-           style="display:flex; flex-wrap:wrap; gap:0.4rem;
-                  justify-content:center; align-items:center;
-                  margin-bottom:0.75rem;"></div>
-
-      <!-- Three.js canvas container -->
-      <div id="rv-container"
-           style="position:relative; width:100%; height:520px;
-                  border-radius:12px; overflow:hidden; background:#e8e8e8;">
-        <canvas style="position:absolute; inset:0; width:100%; height:100%;
-                       display:block; z-index:1;"></canvas>
-        <!-- per-trial reference image (top-left); src set by robot-viewer.js -->
-        <img id="rv-rgb" alt="trial reference"
-             style="position:absolute; top:10px; left:10px; z-index:5;
-                    transform:translateZ(0);
-                    max-width:30%; max-height:42%; width:auto; height:auto;
-                    border-radius:8px; border:2px solid rgba(255,255,255,0.85);
-                    box-shadow:0 2px 8px rgba(0,0,0,0.35); background:#fff;
-                    display:none; pointer-events:none;">
-        <div id="rv-status"
-             style="position:absolute; top:50%; left:50%; z-index:10;
-                    transform:translate(-50%,-50%);
-                    font-size:0.9rem; color:#555; pointer-events:none;
-                    text-align:center; max-width:80%;">
-          Initializing…
-        </div>
-      </div>
-
-      <!-- Controls bar -->
-      <div style="display:flex; align-items:center; gap:0.6rem;
-                  margin-top:0.75rem; flex-wrap:wrap;">
-        <button id="rv-btn-play" class="button is-small is-dark"
-                style="min-width:5.5rem;">▶ Play</button>
-        <input  id="rv-slider"  type="range" min="0" max="0" value="0"
-                style="flex:1; min-width:100px;">
-        <span   id="rv-frame-label"
-                style="font-size:0.8rem; min-width:60px;
-                       text-align:right; font-variant-numeric:tabular-nums;">
-          0 / 0
-        </span>
-        <button id="rv-btn-robot" class="button is-small">Hide Robot</button>
-        <button id="rv-btn-pcd"   class="button is-small">Hide Cloud</button>
-        <button id="rv-btn-fit"   class="button is-small">Fit Camera</button>
-      </div>
-
-      <p class="has-text-centered has-text-grey"
-         style="margin-top:0.4rem; font-size:0.8rem;">
-        Drag to rotate &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Right-drag to pan
-      </p>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
        HUMAN DEMONSTRATION VISUALIZER
        Interactive 3-D view of point cloud, tracked keypoints,
        and relative motion extracted from human demonstrations.
@@ -276,6 +210,72 @@
       </p>
       <p class="has-text-centered has-text-grey"
          style="margin-top:0.1rem; font-size:0.8rem;">
+        Drag to rotate &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Right-drag to pan
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       INTERACTIVE 3D VISUALIZER
+       Data paths are configured in static/js/robot-viewer.js
+       ============================================================ -->
+  <section id="visualizer" class="article-section">
+    <p class="section-kicker">Interactive</p>
+    <h2>Planning visualizer</h2>
+    <div class="viewer">
+      <!-- Trial / sample selectors (buttons injected by robot-viewer.js) -->
+      <div id="rv-trials"
+           style="display:flex; flex-wrap:wrap; gap:0.4rem;
+                  justify-content:center; align-items:center;
+                  margin-bottom:0.5rem;"></div>
+      <div id="rv-samples"
+           style="display:flex; flex-wrap:wrap; gap:0.4rem;
+                  justify-content:center; align-items:center;
+                  margin-bottom:0.75rem;"></div>
+
+      <!-- Three.js canvas container -->
+      <div id="rv-container"
+           style="position:relative; width:100%; height:520px;
+                  border-radius:12px; overflow:hidden; background:#e8e8e8;">
+        <canvas style="position:absolute; inset:0; width:100%; height:100%;
+                       display:block; z-index:1;"></canvas>
+        <!-- per-trial reference image (top-left); src set by robot-viewer.js -->
+        <img id="rv-rgb" alt="trial reference"
+             style="position:absolute; top:10px; left:10px; z-index:5;
+                    transform:translateZ(0);
+                    max-width:30%; max-height:42%; width:auto; height:auto;
+                    border-radius:8px; border:2px solid rgba(255,255,255,0.85);
+                    box-shadow:0 2px 8px rgba(0,0,0,0.35); background:#fff;
+                    display:none; pointer-events:none;">
+        <div id="rv-status"
+             style="position:absolute; top:50%; left:50%; z-index:10;
+                    transform:translate(-50%,-50%);
+                    font-size:0.9rem; color:#555; pointer-events:none;
+                    text-align:center; max-width:80%;">
+          Initializing…
+        </div>
+      </div>
+
+      <!-- Controls bar -->
+      <div style="display:flex; align-items:center; gap:0.6rem;
+                  margin-top:0.75rem; flex-wrap:wrap;">
+        <button id="rv-btn-play" class="button is-small is-dark"
+                style="min-width:5.5rem;">▶ Play</button>
+        <input  id="rv-slider"  type="range" min="0" max="0" value="0"
+                style="flex:1; min-width:100px;">
+        <span   id="rv-frame-label"
+                style="font-size:0.8rem; min-width:60px;
+                       text-align:right; font-variant-numeric:tabular-nums;">
+          0 / 0
+        </span>
+        <button id="rv-btn-robot" class="button is-small">Hide Robot</button>
+        <button id="rv-btn-pcd"   class="button is-small">Hide Cloud</button>
+        <button id="rv-btn-fit"   class="button is-small">Fit Camera</button>
+      </div>
+
+      <p class="has-text-centered has-text-grey"
+         style="margin-top:0.4rem; font-size:0.8rem;">
         Drag to rotate &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Right-drag to pan
       </p>
     </div>
